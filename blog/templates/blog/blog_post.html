@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ article.title }}
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:home' %}">
+			<span class="icon is-small">
+				<i class="fas fa-home" aria-hidden="true"></i>
+			</span>
+			Home
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-book-open" aria-hidden="true"></i>
+		</span>
+		{{ article.title }}
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<div class="content">
+		<p class="mb-5">{{ article.title }}</p>
+		{{ article.get_body_as_markdown }}
+	</div>
+{% endblock content %}

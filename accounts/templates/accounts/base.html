@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{% static "css/accounts.css" %}">
+{% endblock stylesheets %}
+
+{% block body %}
+	<div class="columns center-v px-6">
+		<div class="column is-half px-6">
+			<div class="columns is-centered">	
+				<figure class="column image is-half">
+					<img src="{% static "img/logopng.png" %}" alt="myblog logo">
+				</figure>
+			</div>
+		</div>
+		<div class="vl"></div>
+		<div class="column is-half px-6">
+			<div class="pl-6 pr-4">
+				{% block content %}
+					
+				{% endblock content %}
+			</div>
+		</div>
+	</div>
+{% endblock body %}

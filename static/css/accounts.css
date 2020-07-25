@@ -1,0 +1,24 @@
+::placeholder {
+	color: hsl(0, 0%, 85%);
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: hsl(0, 0%, 85%);
+}
+
+hr {
+	border-color: hsl(0, 0%, 80%) !important;
+	background-color: hsl(0, 0%, 90%);
+}
+
+.spacing {
+	margin-top: 0;
+	border-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.vl {
+	height: 50%;
+	border-left: 1px hsl(0, 0%, 85%) solid; 
+}

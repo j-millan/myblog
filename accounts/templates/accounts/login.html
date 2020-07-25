@@ -1,0 +1,43 @@
+{% extends "accounts/base.html" %}
+{% load widget_tweaks form_tags inclusion_tags %}
+
+{% block title %}
+	Log in
+{% endblock title %}
+
+{% block content %}
+	<form method="post" novalidate>
+		{% csrf_token %}
+		{% if form.non_field_errors %}
+			<div class="notification is-danger">
+				{% for error in form.non_field_errors %}
+					<p>{{ error}}</li>
+				{% endfor %}
+			</div>
+		{% endif %}
+		<div class="field mb-4">
+			<p class="control has-icons-left">
+				{% render_field form.username class=form.username|input_class placeholder="Username" %}
+				<span class="icon is-small is-left">
+					<i class="fas fa-user"></i>
+				</span>
+			</p>
+			{% field_errors form.username %}
+		</div>
+		<div class="field">
+			<p class="control has-icons-left">
+				{% render_field form.password class=form.username|input_class placeholder="Password" %}
+				<span class="icon is-small is-left">
+					<i class="fas fa-lock"></i>
+				</span>
+			</p>
+			{% field_errors form.password %}
+		</div>
+		<hr>
+		<button type="submit" class="button is-fullwidth is-info is-full mt-4">LOG IN</button>
+	</form>
+	<small class="column is-fullwidth has-text-centered has-text-grey py-3">
+		New to MyBlog?
+		<a href="{% url 'accounts:signup' %}">Sign up</a>.
+	</small>
+{% endblock content %}

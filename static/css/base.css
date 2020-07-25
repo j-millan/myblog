@@ -1,0 +1,17 @@
+html, body {
+	height: 100%;
+}
+
+button[type=submit].button.is-info {
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+
+.columns.center-v {
+	height: 100%;
+	align-items: center;
+}
+/*
+.breadcrumb ul {
+	background-color: hsl(0, 0%, 98%);
+}*/

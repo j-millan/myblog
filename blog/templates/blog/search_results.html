@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Results - {{ query }}
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:home' %}">
+			<span class="icon is-small">
+				<i class="fas fa-home" aria-hidden="true"></i>
+			</span>
+			Home
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-search" aria-hidden="true"></i>
+		</span>
+		Search results
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<p class="title is-6 mb-5">Search results for: {{ query }}</p>
+	<div class="columns is-multiline">
+		{% for article in articles %}
+			{% include "blog/includes/article_card.html" with article=article %}
+		{% endfor %}
+	</div>
+{% endblock content %}
