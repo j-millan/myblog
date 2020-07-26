@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, FormView, DetailView, CreateView, UpdateView
 from django.views.generic.base import ContextMixin
+from django.utils.decorators import method_decorator
 from .forms import SearchForm, NewArticleForm
 from .models import BlogPost
 
@@ -30,6 +32,7 @@ class HomeView(TemplateView, SearchFormMixin):
 		context['popular_authors'] = order_by_attribute(User.objects.all()[:12], 'followers')
 		return context
 
+@method_decorator(login_required, name='dispatch')
 class BlogPostCreateView(CreateView, SearchFormMixin):
     model = BlogPost
     form_class = NewArticleForm
