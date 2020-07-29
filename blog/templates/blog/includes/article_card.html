@@ -1,13 +1,13 @@
 {% load inclusion_tags %}
+
 <div class="column is-one-quarter">
 	<div class="card">
 		<div class="card-image mb-0">
-			<figure class="image is-4by3">
-				<img src="{{ article.thumbnail.url }}" alt="article's thumbnail">
+			<figure class="image thumbnail is-5by3" style="background-image: url({{ article.thumbnail.url }});">
 			</figure>
 		</div>
 		<div class="card-content px-3 py-3">
-			<a href="{% url 'blog:article' article.slug %}" class="title mb-2 is-5">{{ article.title }}</a>
+			<a href="{% url 'blog:article' article.slug %}" class="title mb-2 is-6">{{ article.title }}</a>
 			<div class="columns my-1">
 				<small class="column is-half has-text-grey py-1">@{{ article.author.username }}</small>
 				<small class="column is-half has-text-grey is-right has-text-right py-1 pr-4">{{ article.date_published|date:"M n, H:i" }}</small>

@@ -11,6 +11,12 @@ button[type=submit].button.is-info {
 	height: 100%;
 	align-items: center;
 }
+
+figure.thumbnail {
+  	background-position: center;
+	background-size: cover;
+}
+
 /*
 .breadcrumb ul {
 	background-color: hsl(0, 0%, 98%);
