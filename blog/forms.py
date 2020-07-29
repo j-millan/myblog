@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost
+from .models import BlogPost, BlogCategory
 
 class SearchForm(forms.Form):
 	query = forms.CharField(
@@ -16,6 +16,11 @@ class NewArticleForm(forms.ModelForm):
 		max_length=4000,
 	)
 
+	categories = forms.ModelMultipleChoiceField(
+		queryset=BlogCategory.objects.all(),
+		widget=forms.CheckboxSelectMultiple()
+	)
+
 	class Meta:
 		model = BlogPost
-		fields = ['title', 'thumbnail', 'body', 'category', ]
+		fields = ['title', 'thumbnail', 'body', 'categories', ]

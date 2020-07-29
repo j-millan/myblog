@@ -42,6 +42,7 @@ class BlogPostCreateView(CreateView, SearchFormMixin):
     	article = form.save(commit=False)
     	article.author = self.request.user
     	article.save()
+    	form.save_m2m()
     	return redirect('blog:article', slug=article.slug)
 
 class BlogPostDetailView(DetailView, SearchFormMixin):

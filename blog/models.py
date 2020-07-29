@@ -16,11 +16,11 @@ def upload_location(instance, filename):
 class BlogPost(models.Model):
 	title = models.CharField(max_length=75, null=False, blank=False, unique=True)
 	body = models.TextField(max_length=25000, null=False, blank=False)
-	thumbnail = models.ImageField(upload_to=upload_location)
+	thumbnail = models.ImageField(upload_to=upload_location, default='img/blog_thumbnails/default.jpg')
 	author = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE, null=False)
 	date_published  = models.DateTimeField(auto_now_add=True, verbose_name='date published') 
 	date_updated  = models.DateTimeField(auto_now=True, verbose_name='date updated')
-	category = models.ForeignKey('BlogCategory', default=DEFAULT_CATEGORY_ID, related_name='articles', on_delete=models.SET_DEFAULT)
+	categories = models.ManyToManyField('BlogCategory', default=DEFAULT_CATEGORY_ID, related_name='articles')
 	slug = models.SlugField(blank=True, unique=True)
 
 	def __str__(self):

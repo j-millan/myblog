@@ -12,7 +12,11 @@
 				<small class="column is-half has-text-grey py-1">@{{ article.author.username }}</small>
 				<small class="column is-half has-text-grey is-right has-text-right py-1 pr-4">{{ article.date_published|date:"M n, H:i" }}</small>
 			</div>
-			{% render_tag article.category %}
+			<div class="tags">
+				{% for category in article.categories.all %}
+					{% render_tag category %}
+				{% endfor %}
+			</div>	
 		</div>
 	</div>
 </div>

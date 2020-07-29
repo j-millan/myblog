@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% load widget_tweaks form_tags inclusion_tags %}
+{% load static widget_tweaks form_tags inclusion_tags %}
 
 {% block title %}
 	Create an article
 {% endblock title %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 {% endblock stylesheets %}
 
 {% block breadcrumb %}
@@ -53,17 +53,18 @@
 					</div>
 					{% field_errors form.body %}
 				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.category.label_tag }}</label>
-					<p class="control has-icons-left">
-						<span class="select">
-							{% render_field form.category class=form.category|input_class %}
-						</span>
-						<span class="icon is-small is-left">
-							<i class="fas fa-hashtag"></i>
-						</span>
-					</p>
-					{% field_errors form.body %}
+				<div class="field mb-4 categories">
+					<label class="label">{{ form.categories.label_tag }}</label>
+					<div class="columns is-multiline py-2 pl-3" id="id_categoires">
+						{% for category in form.categories %}
+							<div class="column is-one-fifth py-1">
+								<label for="id_categories">
+									{{ category.tag }} {{ category.choice_label }}
+								</label>
+							</div>
+						{% endfor %}
+					</div>
+					{% field_errors form.categories %}
 				</div>
 				<div class="columns mt-5">
 					<div class="column">
