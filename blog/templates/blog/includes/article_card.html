@@ -9,14 +9,16 @@
 		<div class="card-content px-3 py-3">
 			<a href="{% url 'blog:article' article.slug %}" class="title mb-2 is-6">{{ article.title }}</a>
 			<div class="columns my-1">
-				<small class="column is-half has-text-grey py-1">@{{ article.author.username }}</small>
+				<small class="column is-half py-1">
+					<a href="{% url 'blog:author_profile' article.author.pk %}" class="has-text-grey">@{{ article.author.username }}</a>
+				</small>
 				<small class="column is-half has-text-grey is-right has-text-right py-1 pr-4">{{ article.date_published|date:"M n, H:i" }}</small>
 			</div>
 			<div class="tags">
 				{% for category in article.categories.all %}
 					{% render_tag category %}
 				{% endfor %}
-			</div>	
+			</div>
 		</div>
 	</div>
 </div>

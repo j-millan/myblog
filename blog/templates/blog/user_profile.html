@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load inclusion_tags %}
+
+{% block title %}
+	{{ author.username }}'s profile
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:home' %}">
+			<span class="icon is-small">
+				<i class="fas fa-home" aria-hidden="true"></i>
+			</span>
+			Home
+		</a>
+	</li>
+	<li>
+		<a href="#">
+			<span class="icon is-small">
+				<i class="fas fa-user-edit" aria-hidden="true"></i>
+			</span>
+			Authors
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-user" aria-hidden="true"></i>
+		</span>
+		{{ author.username }}'s profile
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<div class="columns">
+		<div class="column is-one-fifth">
+			<div class="box px-5 mb-1">
+				<figure class="image thumbnail is-1by1 has-background-link-light" style="background-image: url({{ author.profile.profile_picture.url }}); border-radius: 50%;">
+				</figure>
+				<div class="info mt-3">
+					<p class="title-6">{{ author.first_name }} {{ author.last_name }}</p>
+					<small class="has-text-grey">@{{ author.username }}</small>
+					<hr class="my-2">
+					<small>{{ author.profile.about }}</small>
+					<hr class="my-2">
+				</div>
+				<div class="icons">
+					{% social_icons author %}
+				</div>
+			</div>
+			{% if author == user %}
+				<small class="has-text-centered is-block">
+					<a href="#" class="has-text-grey">edit profile</a>
+				</small>
+			{% endif %}
+		</div>
+		<div class="column is-two-thirds">
+
+		</div>
+	</div>
+{% endblock content %}

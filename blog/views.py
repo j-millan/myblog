@@ -51,6 +51,11 @@ class BlogPostDetailView(DetailView, SearchFormMixin):
     slug_url_kwarg = 'slug'
     template_name = "blog/blog_post.html"
 
+class UserDetailView(DetailView, SearchFormMixin):
+    model = User
+    context_object_name = 'author'
+    template_name = "blog/user_profile.html"
+
 def search_results(request):
 	if request.method == 'POST':
 		form = SearchForm(request.POST)

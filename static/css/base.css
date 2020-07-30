@@ -17,6 +17,10 @@ figure.thumbnail {
 	background-size: cover;
 }
 
+.has-text-brown {
+    color: hsl(0, 27%, 56%) !important;
+}
+
 /*
 .breadcrumb ul {
 	background-color: hsl(0, 0%, 98%);

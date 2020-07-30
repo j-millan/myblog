@@ -1,0 +1,7 @@
+{% for item in info %}
+	<a href="{{ item.value }}" title="{{ item.title }}">
+		<span class="icon is-medium {{ item.color }}">
+			<i class="{{ item.icon_class }}"></i>
+		</span>
+	</a>
+{% endfor %}
