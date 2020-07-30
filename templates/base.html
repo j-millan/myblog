@@ -14,8 +14,8 @@
 		{% block body %}
 			<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
 				<div class="navbar-brand mx-3">
-					<a href="navbar-item" class="{% url 'blog:home' %}">
-						<img class="py-2 px-2" src="{% static "img/logopng.png" %}" alt="MyBlog logo" width="85" height="27">
+					<a href="{% url 'blog:home' %}">
+						<img class="py-2 px-2" src="{% static "img/logopng.png" %}" alt="MyBlog logo" width="85" height="50">
 					</a>
 					<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
 					  <span aria-hidden="true"></span>
@@ -70,14 +70,21 @@
 					</div>
 				</div>
 			</nav>
+			<div class="breadcrumb is-left pt-3" aria-label="breadcrumbs">
+				<ul class="py-1 pl-2 has-background-primary-light">
+					{% block breadcrumb %}
+					<li>
+						<span class="icon is-small">
+							<i class="fas fa-home" aria-hidden="true"></i>
+						</span>
+						Home
+					</li>
+					{% endblock breadcrumb %}
+				</ul>
+			</div>
 
 			<section class="section pt-4 has-text-grey">
-				<div class="breadcrumb is-centered" aria-label="breadcrumbs">
-					<ul class="py-2">
-						{% block breadcrumb %}
-						{% endblock breadcrumb %}
-					</ul>
-				</div>
+				
 				<div class="container">
 					{% block content %}
 						
