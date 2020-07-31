@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, FormView, DetailView, CreateView,
 from django.views.generic.base import ContextMixin
 from django.utils.decorators import method_decorator
 from .forms import SearchForm, NewArticleForm
-from .models import BlogPost
+from .models import BlogPost, UserFollowing
 
 def order_by_attribute(listset, attr):
 	l = list(listset)
@@ -22,16 +22,6 @@ class SearchFormMixin(ContextMixin):
 		context['search_form'] = SearchForm()
 		return context
 
-class HomeView(TemplateView, SearchFormMixin):
-	template_name = 'blog/home.html'
-
-	def get_context_data(self):
-		context = super().get_context_data()
-		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
-		context['popular_articles'] = order_by_attribute(BlogPost.objects.all(), 'comments')[:12]
-		context['popular_authors'] = order_by_attribute(User.objects.all()[:12], 'followers')
-		return context
-
 @method_decorator(login_required, name='dispatch')
 class BlogPostCreateView(CreateView, SearchFormMixin):
     model = BlogPost
@@ -45,6 +35,16 @@ class BlogPostCreateView(CreateView, SearchFormMixin):
     	form.save_m2m()
     	return redirect('blog:article', slug=article.slug)
 
+class HomeView(TemplateView, SearchFormMixin):
+	template_name = 'blog/home.html'
+
+	def get_context_data(self):
+		context = super().get_context_data()
+		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
+		context['popular_articles'] = order_by_attribute(BlogPost.objects.all(), 'comments')[:12]
+		context['popular_authors'] = order_by_attribute(User.objects.all()[:12], 'followers')
+		return context
+
 class BlogPostDetailView(DetailView, SearchFormMixin):
     model = BlogPost
     context_object_name = 'article'
@@ -56,6 +56,24 @@ class UserDetailView(DetailView, SearchFormMixin):
     context_object_name = 'author'
     template_name = "blog/user_profile.html"
 
+@login_required
+def follow_author(request, pk):
+	author = get_object_or_404(User, pk=pk)
+	new_follower = UserFollowing.objects.filter(user=request.user, user_following=author)
+	if not new_follower.exists():
+		new_follower = UserFollowing.objects.create(user=request.user, user_following=author)
+
+	return redirect('blog:author_profile', pk=pk)
+
+@login_required
+def unfollow_author(request, pk):
+	author = get_object_or_404(User, pk=pk)
+	follower = UserFollowing.objects.filter(user=request.user, user_following=author)
+	if follower.exists():
+		follower.delete()
+
+	return redirect('blog:author_profile', pk=pk)
+	
 def search_results(request):
 	if request.method == 'POST':
 		form = SearchForm(request.POST)

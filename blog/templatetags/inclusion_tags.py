@@ -1,4 +1,6 @@
 from django import template
+from django.urls import reverse
+from ..models import UserFollowing
 
 register = template.Library()
 
@@ -11,6 +13,17 @@ def render_tag(category):
 @register.inclusion_tag('inclusion_tags/field_errors.html')
 def field_errors(field):
 	context = {'field': field}
+	return context
+
+@register.inclusion_tag('inclusion_tags/follow_tag_button.html')
+def follow_tag_button(author, user):
+	context = dict()
+	follower = UserFollowing.objects.filter(user=user, user_following=author)
+	if follower.exists():
+		context = {'url': reverse('blog:unfollow_author', kwargs={'pk': author.pk}), 'tag_color': 'is-danger', 'fa_icon': 'fa-user-minus', 'text': 'Unfollow'}
+	else:
+		context = {'url': reverse('blog:follow_author', kwargs={'pk': author.pk}), 'tag_color': 'is-link', 'fa_icon': 'fa-user-plus', 'text': 'Follow'}
+
 	return context
 
 @register.inclusion_tag('inclusion_tags/social_icons.html')
