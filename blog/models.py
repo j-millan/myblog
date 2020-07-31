@@ -29,6 +29,9 @@ class BlogPost(models.Model):
 	def get_body_as_markdown(self):
 		return mark_safe(markdown(self.body, safe_mode='escape'))
 
+	def get_truncated_body(self):
+		return Truncator(self.body).chars(250)
+
 @receiver(post_delete, sender=BlogPost)
 def submission_delete(sender, instance, *args, **kwargs):
 	instance.image.delete(False)

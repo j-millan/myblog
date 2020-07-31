@@ -51,6 +51,25 @@
 				<small class="has-text-centered is-block">
 					<a href="#" class="has-text-grey">edit profile</a>
 				</small>
+				<small class="has-text-centered is-block">
+					{{ user.followers.count }} followers
+				</small>
+			{% else %}
+				<div class="columns is-centered pt-2">
+					<div class="column">
+						<p class="tags has-addons is-centered">
+							<a href="#" class="tag is-link">
+								<span class="icon is-small">
+									<i class="fas fa-user-plus"></i>
+								</span>
+								<span>Follow</span>
+							</a>
+							<a class="tag is-link is-light">
+								{{ author.followers.count }}
+							</a>
+						</p>
+					</div>
+				</div>
 			{% endif %}
 		</div>
 		<div class="column is-multiline">
