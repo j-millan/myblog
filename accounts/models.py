@@ -16,3 +16,6 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return f"{self.user.username}'s profile"
+
+	def get_ordered_posts(self):
+		return self.user.posts.all().order_by('-date_published')

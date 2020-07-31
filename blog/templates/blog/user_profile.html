@@ -53,8 +53,10 @@
 				</small>
 			{% endif %}
 		</div>
-		<div class="column is-two-thirds">
-
+		<div class="column is-multiline">
+			{% for article in author.profile.get_ordered_posts %}
+				{% include "blog/includes/article_row.html" %}
+			{% endfor %}
 		</div>
 	</div>
 {% endblock content %}

@@ -1,0 +1,19 @@
+{% load inclusion_tags %}
+<div class="column is-full mb-5">
+	<div class="columns box px-0 py-0">
+		<div class="column is-one-quarter py-0 px-0">
+			<figure class="image thumbnail is-16by9" style="background-image: url({{ article.thumbnail.url }});"></figure>
+		</div>
+		<div class="column">
+			<div class="columns pl-3 pt-2">
+				<a href="{% url 'blog:article' article.slug %}" class="column title is-two-thirds is-6 has-text-dark">{{ article.title }}</a>
+				<small class="column has-text-right has-text-grey pr-5">{{ article.date_published }}</small>
+			</div>
+			<div class="tags">
+				{% for category in article.categories.all %}
+					{% render_tag category %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
