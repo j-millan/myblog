@@ -49,7 +49,7 @@ class NewArticleViewTests(NewArticleViewTestCase):
 	def test_form_inputs(self):
 		self.assertContains(self.response, '<input', 5)
 		self.assertContains(self.response, '<textarea', 1)
-		self.assertContains(self.response, '<select', 1)
+		self.assertContains(self.response, 'id="id_categories"', 1)
 
 class SuccessfulNewArticleViewTests(NewArticleViewTestCase):
 	def setUp(self):
@@ -65,7 +65,7 @@ class SuccessfulNewArticleViewTests(NewArticleViewTestCase):
 		data = {
 			'title': self.title,
 			'body': 'aaaaa',
-			'category': cat
+			'categories': {cat}
 		}
 		file_dict = {
 			'thumbnail': png

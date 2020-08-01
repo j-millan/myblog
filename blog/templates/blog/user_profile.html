@@ -51,20 +51,23 @@
 				<small class="has-text-centered is-block">
 					<a href="#" class="has-text-grey">edit profile</a>
 				</small>
-				<small class="has-text-centered is-block">
-					{{ user.followers.count }} followers
-				</small>
 			{% else %}
-				<div class="columns is-centered pt-2">
-					<div class="column">
-						<p class="tags has-addons is-centered">
-							{% follow_tag_button author user %}
-							<a class="tag is-link is-light">
-								{{ author.followers.count }}
-							</a>
-						</p>
+				{% if user.is_authenticated %}
+					<div class="columns is-centered pt-2">
+						<div class="column">
+							<p class="tags has-addons is-centered">
+								{% follow_tag_button author user %}
+								<a class="tag is-link is-light">
+									{{ author.followers.count }}
+								</a>
+							</p>
+						</div>
 					</div>
-				</div>
+				{% else %}
+					<small class="has-text-centered is-block">
+						{{ user.followers.count }} followers
+					</small>
+				{% endif %}
 			{% endif %}
 		</div>
 		<div class="column is-multiline">
