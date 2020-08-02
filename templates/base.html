@@ -26,7 +26,7 @@
 				<div class="navbar-menu">
 					<div class="navbar-start">
 						<a href="{% url 'blog:home' %}" class="navbar-item">Home</a>
-						<a href="#" class="navbar-item">Articles</a>
+						<a href="#" class="navbar-item">Explore</a>
 						<a href="#" class="navbar-item">About</a>
 					</div>
 					<div class="navbar-end">
@@ -51,9 +51,9 @@
 										<i class="fas fa-plus"></i>
 									</span>
 								</a>
-								<div class="navbar-item has-dropdown is-hoverable ml-2">
-									<a class="navbar-link">{{ user.username }}</a>
-									<div class="navbar-dropdown">
+								<div class="navbar-item has-dropdown dropdown ml-2">
+									<a class="navbar-link dropdown-trigger">{{ user.username }}</a>
+									<div class="navbar-dropdown dropdown-menu">
 										<a href="{% url 'blog:author_profile' user.pk %}" class="navbar-item">Profile</a>
 										<a href="#" class="navbar-item">Settings</a>
 										<hr class="navbar-divider">
@@ -93,7 +93,7 @@
 			</section>
 		{% endblock body %}
 
-		<script src="{% static "js/bulma.js" %}"></script>
+		<script src="{% static "js/bulma/bulma.js" %}"></script>
 		{% block javascript %}{% endblock javascript %}
 	</body>
 </html>

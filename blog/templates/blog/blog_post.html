@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load inclusion_tags %}
 
 {% block title %}
 	{{ article.title }}
@@ -16,9 +17,17 @@
 	<li>
 		<a href="#">
 			<span class="icon is-small">
-				<i class="fas fa-hashtag" aria-hidden="true"></i>
+				<i class="fas fa-user-edit" aria-hidden="true"></i>
 			</span>
-			Category: {{ article.categories.all.first.name }}
+			Authors
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'blog:author_profile' article.author.pk %}">
+			<span class="icon is-small">
+				<i class="fas fa-user" aria-hidden="true"></i>
+			</span>
+			{{ article.author.username }}
 		</a>
 	</li>
 	<li class="is-active">
@@ -30,8 +39,44 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-	<div class="content">
-		<p class="mb-5">{{ article.title }}</p>
-		{{ article.get_body_as_markdown }}
+	<div class="columns">
+		<div class="column content px-6 mr-6">
+			<div class="tags mb-1">
+				{% for category in article.categories.all %}
+					{% render_tag category %}
+				{% endfor %}
+			</div>
+			<hr class="mt-1 mb-3">
+			<p class="title is-5 has-text-centered mb-2">
+				{{ article.title }}
+			</p>
+			<p class="is-5 has-text-centered" title="{{ article.date_published}}">{{ article.date_published|date:"d.m.Y" }}</p>
+			<figure class="image is-fullwidth is-16by9 mx-0 my-0">
+				<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
+			</figure>
+			<div class="body is-size-5 mt-4">
+				{{ article.get_body_as_markdown }}
+			</div>
+		</div>
+		<div class="column is-one-fifth mt-2 px-4">
+			<p class="level is-size-5">About the author:</p>
+			<div class="columns">
+				<div class="column is-4 px-0 py-0">
+					<figure class="image thumbnail is-1by1 has-background-link-light" style="background-image: url({{ article.author.profile.profile_picture.url }}); border-radius: 50%;"></figure>
+				</div>
+				<p class="title-6 column pr-0 pb-0 is-vcentered">
+					{{ article.author.profile.get_full_name }}
+					<a href="{% url 'blog:author_profile' article.author.pk %}" class="has-text-grey">@{{ article.author.username }}</a>
+				</p>
+			</div>
+			<div class="info mt-2">
+				<hr class="my-2">
+				<small>{{ article.author.profile.about }}</small>
+				<hr class="my-2">
+			</div>
+			<div class="icons">
+				{% social_icons article.author %}
+			</div>
+		</div>
 	</div>
 {% endblock content %}

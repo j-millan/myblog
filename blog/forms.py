@@ -12,8 +12,7 @@ class NewArticleForm(forms.ModelForm):
 	body = forms.CharField(
 		widget=forms.Textarea(
 			attrs={'rows': 15, 'placeholder': 'XD'}
-		), 
-		max_length=4000,
+		),
 	)
 
 	categories = forms.ModelMultipleChoiceField(

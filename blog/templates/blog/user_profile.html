@@ -37,7 +37,7 @@
 				<figure class="image thumbnail is-1by1 has-background-link-light" style="background-image: url({{ author.profile.profile_picture.url }}); border-radius: 50%;">
 				</figure>
 				<div class="info mt-3">
-					<p class="title-6">{{ author.first_name }} {{ author.last_name }}</p>
+					<p class="title-6">{{ author.profile.get_full_name }}</p>
 					<small class="has-text-grey">@{{ author.username }}</small>
 					<hr class="my-2">
 					<small>{{ author.profile.about }}</small>
@@ -65,7 +65,7 @@
 					</div>
 				{% else %}
 					<small class="has-text-centered is-block">
-						{{ user.followers.count }} followers
+						{{ author.followers.count }} followers
 					</small>
 				{% endif %}
 			{% endif %}
