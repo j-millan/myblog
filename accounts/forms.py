@@ -26,6 +26,25 @@ class SignUpForm(UserCreationForm):
 		model = User
 		fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
+class UpdateUserForm(forms.ModelForm):
+	email = forms.EmailField()
+
+	first_name = forms.CharField(
+		max_length=60,
+		required=True,
+		widget=forms.TextInput()
+	)
+
+	last_name = forms.CharField(
+		max_length=60,
+		required=True,
+		widget=forms.TextInput()
+	)
+
+	class Meta:
+		model = User
+		fields = ['first_name', 'last_name', 'email']
+
 class UpdateProfileForm(forms.ModelForm):
 	about = forms.CharField(
 		widget=forms.Textarea(

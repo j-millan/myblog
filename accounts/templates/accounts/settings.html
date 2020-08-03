@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load widget_tweaks form_tags inclusion_tags %}
+
+{% block title %}
+	User settings
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:author_profile' user.pk %}">
+			<span class="icon is-small">
+				<i class="fas fa-user" aria-hidden="true"></i>
+			</span>
+			User
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-user-cog" aria-hidden="true"></i>
+		</span>
+		Settings
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<div class="columns">
+		<div class="column is-full-mobile is-one-third-desktop">
+			<form method="post" novalidate>
+				{% csrf_token %}
+				{% if form.non_field_errors %}
+					<div class="notification is-danger">
+						{% for error in form.non_field_errors %}
+							<p>{{ error}}</li>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<div class="field mb-4">
+					<label class="label">{{ form.first_name.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.first_name class=form.first_name|input_class %}
+						<span class="icon is-small is-left">
+							<i class="fas fa-signature"></i>
+						</span>
+					</p>
+					{% field_errors form.first_name %}
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.last_name.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.last_name class=form.last_name|input_class %}
+						<span class="icon is-small is-left">
+							<i class="fas fa-star-of-life"></i>
+						</span>
+					</p>
+					{% field_errors form.last_name %}
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.email.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.email class=form.email|input_class %}
+						<span class="icon is-small is-left">
+							<i class="fas fa-star-of-life"></i>
+						</span>
+					</p>
+					{% field_errors form.email %}
+				</div>
+				<div class="buttons">
+					<button type="submit" class="button is-success is-block">Save changes</button>
+					<a href="#" class="button is-warning">Change password</a>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}
