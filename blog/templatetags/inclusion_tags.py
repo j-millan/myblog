@@ -29,11 +29,11 @@ def follow_tag_button(author, user):
 @register.inclusion_tag('inclusion_tags/social_icons.html')
 def social_icons(author):
 	info = list()
-	if author.profile.facebook_profile != None:
+	if author.profile.facebook_page != None:
 		facebook_info = {
 			'color':'has-text-link', 
 			'icon_class': 'fab fa-2x fa-facebook-square', 
-			'value': author.profile.facebook_profile, 
+			'value': author.profile.facebook_page, 
 			'title': 'Facebook'
 		}
 		info.append(facebook_info)

@@ -49,7 +49,10 @@
 			</div>
 			{% if author == user %}
 				<small class="has-text-centered is-block">
-					<a href="#" class="has-text-grey">edit profile</a>
+					{{ author.followers.count }} followers
+				</small>
+				<small class="has-text-centered is-block">
+					<a href="{% url 'accounts:edit_profile' %}" class="has-text-grey">edit profile</a>
 				</small>
 			{% else %}
 				{% if user.is_authenticated %}

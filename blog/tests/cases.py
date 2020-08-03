@@ -10,4 +10,4 @@ class AuthorProfileViewTestCase(TestCase):
 		self.author = User.objects.create_user(username='author', password='456')
 		self.user = User.objects.create_user(username=self.username, password=self.password)
 		profile = Profile.objects.create(user=self.user)
-		author_profile = Profile.objects.create(user=self.author, facebook_profile='https://www.facebook.com')
+		author_profile = Profile.objects.create(user=self.author, facebook_page='https://www.facebook.com')

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static widget_tweaks inclusion_tags form_tags %}
+
+{% block title %}
+	Edit profile
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:author_profile' user.pk %}">
+			<span class="icon is-small">
+				<i class="fas fa-user" aria-hidden="true"></i>
+			</span>
+			User
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-user-edit" aria-hidden="true"></i>
+		</span>
+		Edit profile
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<div class="columns is-centered">
+		<div class="column is-12-mobile is-6">
+			<form method="post" novalidate enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="field columns">
+					<div class="column is-5">
+						<figure class="image thumbnail is-1by1" id="picPreview" style="background-image: url({{ user.profile.profile_picture.url }}); box-shadow: 0px 0px 1px 2px hsl(0, 0%, 65%); border-radius: 50%;"></figure>
+					</div>
+					<div class="column">
+						<label class="label">{{ form.profile_picture.label_tag }}</label>
+						{% render_field form.profile_picture id="imgInput" %}
+						<p class="help is-white-ter">Square images are recomended.</p>
+						{% field_errors form.profile_picture %}
+					</div>
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.about.label_tag }}</label>
+					{% render_field form.about class=form.about|input_class %}
+					<p class="help">Max characters amount is 250.</p>
+					{% field_errors form.about %}
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.phone_number.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.phone_number class=form.phone_number|input_class placeholder="0 426 684 3456 " %}
+						<span class="icon is-small is-left">
+							<i class="fas fa-phone"></i>
+						</span>
+					</p>
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.facebook_page.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.facebook_page class=form.facebook_page|input_class placeholder="https://www.facebook.com" %}
+						<span class="icon is-small is-left">
+							<i class="fab fa-facebook-square"></i>
+						</span>
+					</p>
+					<p class="help">Using personal accounts is not recommended.</p>
+				</div>
+				<div class="field mb-4">
+					<label class="label">{{ form.instagram_profile.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.instagram_profile class=form.instagram_profile|input_class placeholder="https://www.instagram.com" %}
+						<span class="icon is-small is-left">
+							<i class="fab fa-instagram-square"></i>
+						</span>
+					</p>
+				</div>
+				<div class="field mb-5">
+					<label class="label">{{ form.twitter_profile.label_tag }}</label>
+					<p class="control has-icons-left">
+						{% render_field form.twitter_profile class=form.twitter_profile|input_class placeholder="https://www.twitter.com" %}
+						<span class="icon is-small is-left">
+							<i class="fab fa-twitter-square"></i>
+						</span>
+					</p>
+				</div>
+				<div class="buttons mb-2 is-centered">
+					<button type="submit" class="button is-success is-block">Save changes</button>
+					<a href="{% url 'blog:author_profile' user.pk %}" class="button is-block is-danger">Cancel</a>
+				</div>
+			</form>
+			<small class="is-block has-text-centered">
+				<a href="#" class="has-text-grey">Account settings</a>
+			</small>
+		</div>
+	</div>
+{% endblock content %}
+
+{% block javascript %}
+	<script src="{% static "js/jquery-3.5.1.min.js" %}"></script>
+	<script>
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            $('#picPreview').css('background-image', 'url(' + e.target.result + ')');
+		            console.log(e.target.result)
+		        }
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInput").change(function(){
+		   readURL(this);
+		});
+	</script>
+{% endblock javascript %}
