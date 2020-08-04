@@ -44,43 +44,10 @@
 					<p class="help">Max characters amount is 250.</p>
 					{% field_errors form.about %}
 				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.phone_number.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.phone_number class=form.phone_number|input_class placeholder="0 426 684 3456 " %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-phone"></i>
-						</span>
-					</p>
-				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.facebook_page.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.facebook_page class=form.facebook_page|input_class placeholder="https://www.facebook.com" %}
-						<span class="icon is-small is-left">
-							<i class="fab fa-facebook-square"></i>
-						</span>
-					</p>
-					<p class="help">Using personal accounts is not recommended.</p>
-				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.instagram_profile.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.instagram_profile class=form.instagram_profile|input_class placeholder="https://www.instagram.com" %}
-						<span class="icon is-small is-left">
-							<i class="fab fa-instagram-square"></i>
-						</span>
-					</p>
-				</div>
-				<div class="field mb-5">
-					<label class="label">{{ form.twitter_profile.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.twitter_profile class=form.twitter_profile|input_class placeholder="https://www.twitter.com" %}
-						<span class="icon is-small is-left">
-							<i class="fab fa-twitter-square"></i>
-						</span>
-					</p>
-				</div>
+				{% render_field_with_icon form.phone_number 'fas fa-phone' placeholder='0 426 684 3456' %}
+				{% render_field_with_icon form.facebook_page 'fab fa-facebook-square' placeholder='https://www.facebook.com' %}
+				{% render_field_with_icon form.twitter_profile 'fab fa-twitter-square' placeholder='https://www.twitter.com' %}
+				{% render_field_with_icon form.instagram_profile 'fab fa-instagram-square' placeholder='https://www.instagram.com' %}
 				<div class="buttons mb-2 is-centered">
 					<button type="submit" class="button is-success is-block">Save changes</button>
 					<a href="{% url 'blog:author_profile' user.pk %}" class="button is-block is-danger">Cancel</a>
@@ -99,12 +66,10 @@
 		function readURL(input) {
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
-
 		        reader.onload = function (e) {
 		            $('#picPreview').css('background-image', 'url(' + e.target.result + ')');
 		            console.log(e.target.result)
 		        }
-
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}

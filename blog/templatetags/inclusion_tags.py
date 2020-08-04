@@ -10,11 +10,6 @@ def render_tag(category):
 	context = {'class': css_class, 'category': category}
 	return context
 
-@register.inclusion_tag('inclusion_tags/field_errors.html')
-def field_errors(field):
-	context = {'field': field}
-	return context
-
 @register.inclusion_tag('inclusion_tags/follow_tag_button.html')
 def follow_tag_button(author, user):
 	context = dict()

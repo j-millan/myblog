@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load widget_tweaks form_tags inclusion_tags %}
+{% load form_tags %}
 
 {% block title %}
 	User settings
@@ -34,36 +34,9 @@
 						{% endfor %}
 					</div>
 				{% endif %}
-				<div class="field mb-4">
-					<label class="label">{{ form.first_name.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.first_name class=form.first_name|input_class %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-signature"></i>
-						</span>
-					</p>
-					{% field_errors form.first_name %}
-				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.last_name.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.last_name class=form.last_name|input_class %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-star-of-life"></i>
-						</span>
-					</p>
-					{% field_errors form.last_name %}
-				</div>
-				<div class="field mb-4">
-					<label class="label">{{ form.email.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.email class=form.email|input_class %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-star-of-life"></i>
-						</span>
-					</p>
-					{% field_errors form.email %}
-				</div>
+				{% render_field_with_icon form.first_name "fas fa-signature" %}
+				{% render_field_with_icon form.last_name "fas fa-star-of-life" %}
+				{% render_field_with_icon form.email "fas fa-envelope" %}
 				<div class="buttons">
 					<button type="submit" class="button is-success is-block">Save changes</button>
 					<a href="#" class="button is-warning">Change password</a>

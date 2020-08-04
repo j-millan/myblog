@@ -1,5 +1,5 @@
 {% extends "accounts/base.html" %}
-{% load widget_tweaks form_tags inclusion_tags %}
+{% load widget_tweaks form_tags %}
 
 {% block title %}
 	Sign up
@@ -8,59 +8,21 @@
 {% block content %}
 	<form method="post" novalidate>
 		{% csrf_token %}
-		{% if form.non_field_errors %}
-			<div class="notification is-danger">
-				{% for error in form.non_field_errors %}
-					<p>{{ error}}</li>
-				{% endfor %}
-			</div>
-		{% endif %}
+		{% include "includes/form_errors.html" %}
 		<div class="field -is-horizontal">
 			<div class="field-body">
-				<div class="field">
-					<p class="control has-icons-left">		
-						{% render_field form.first_name class=form.first_name|input_class placeholder="First name" %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-signature"></i>
-						</span>
-						{% field_errors form.first_name %}
-					</p>
-				</div>
+				{% render_field_with_icon form.first_name 'fas fa-signature' label=False margin_bottom="" %}
 				<div class="field">
 					{% render_field form.last_name class=form.last_name|input_class placeholder="Last name" %}
 					{% field_errors form.last_name %}
 				</div>
 			</div>
 		</div>
-		<div class="field mb-3">
-			<p class="control has-icons-left">
-				{% render_field form.username class=form.username|input_class placeholder="Username" %}
-				<span class="icon is-small is-left">
-					<i class="fas fa-user"></i>
-				</span>
-			</p>
-			{% field_errors form.username %}
-		</div>
-		<div class="field mb-3">
-			<p class="control has-icons-left">
-				{% render_field form.email class=form.email|input_class placeholder="Email" %}
-				<span class="icon is-small is-left">
-					<i class="fas fa-envelope"></i>
-				</span>
-			</p>
-			{% field_errors form.email %}
-		</div>
+		{% render_field_with_icon form.username 'fas fa-user' label=False margin_bottom="mb-3" %}
+		{% render_field_with_icon form.email 'fas fa-envelope' label=False margin_bottom="mb-3" %}
 		<div class="field -is-horizontal">
 			<div class="field-body">
-				<div class="field">
-					<p class="control has-icons-left">
-						{% render_field form.password1 class=form.password1|input_class placeholder="Password" %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-lock"></i>
-						</span>
-						{% field_errors form.password1 %}
-					</p>
-				</div>
+				{% render_field_with_icon form.password1 'fas fa-lock' label=False margin_bottom="" %}
 				<div class="field">
 					{% render_field form.password2 class=form.password2|input_class placeholder="Password confirmation" %}
 					{% field_errors form.password2 %}

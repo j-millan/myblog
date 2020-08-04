@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, FormView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -22,7 +22,7 @@ class SignUpView(CreateView, SearchFormMixin):
 		return redirect('blog:home')
 
 @method_decorator(login_required, name='dispatch')
-class UserUpdateView(UpdateView):
+class UserUpdateView(UpdateView, SearchFormMixin):
     model = User
     form_class = UpdateUserForm
     template_name = "accounts/settings.html"
@@ -36,7 +36,7 @@ class UserUpdateView(UpdateView):
     	return redirect('blog:author_profile', pk=self.object.pk)
 
 @method_decorator(login_required, name='dispatch')
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(UpdateView, SearchFormMixin):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "accounts/edit_profile.html"

@@ -1,0 +1,18 @@
+{% load widget_tweaks form_tags %}
+
+<div class="field {{ margin }}">
+	{% if label %}
+		<label class="label">{{ field.label_tag }}</label>
+	{% endif %}
+	<p class="control has-icons-left">
+		{% if placeholder %}
+			{% render_field field class=field|input_class placeholder=placeholder %}
+		{% else %}
+			{% render_field field class=field|input_class placeholder=field.label %}
+		{% endif %}
+		<span class="icon is-small is-left">
+			<i class="{{ icon_class }}"></i>
+		</span>
+	</p>
+	{% field_errors field %}
+</div>

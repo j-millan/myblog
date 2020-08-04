@@ -31,16 +31,7 @@
 		<div class="column is-three-quarters">
 			<form method="post" novalidate enctype="multipart/form-data">
 				{% csrf_token %}
-				<div class="field mb-4">
-					<label class="label">{{ form.title.label_tag }}</label>
-					<p class="control has-icons-left">
-						{% render_field form.title class=form.title|input_class placeholder="My first article!" %}
-						<span class="icon is-small is-left">
-							<i class="fas fa-heading"></i>
-						</span>
-					</p>
-					{% field_errors form.title %}
-				</div>
+				{% render_field_with_icon form.title 'fas fa-heading' placeholder='My first article' %}
 				<div class="field mb-4">
 					<label class="label">{{ form.thumbnail.label_tag }}</label>
 					{% render_field form.thumbnail %}

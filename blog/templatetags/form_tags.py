@@ -18,3 +18,19 @@ def input_class(field):
 			css_class = 'is-success'
 
 	return f'{bulma_input_class} {css_class}'
+
+@register.inclusion_tag('inclusion_tags/field_errors.html')
+def field_errors(field):
+	context = {'field': field}
+	return context
+
+@register.inclusion_tag('inclusion_tags/field_with_icon.html')
+def render_field_with_icon(field, icon_class, placeholder=False, label=True, margin_bottom='mb-4'):
+	context = {
+		'field': field, 
+		'icon_class': icon_class, 
+		'placeholder': placeholder,
+		'label': label,
+		'margin': margin_bottom
+	}
+	return context
