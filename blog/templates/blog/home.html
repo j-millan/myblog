@@ -21,7 +21,7 @@
 	<div class="level">
 		<ul>
 			{% for author in popular_authors %}
-				<li>{{ author.username }} - {{ author.followers.count }} followers</li>
+				<li><a href="{% url 'blog:author_profile' author.pk %}">{{ author.username }} - {{ author.followers.count }} followers</a></li>
 			{% endfor %}
 		</ul>
 	</div>

@@ -13,7 +13,7 @@ button[type=submit].button.is-info {
 }
 
 figure.thumbnail {
-  	background-position: center;
+	background-position: center;
 	background-size: cover;
 }
 
@@ -26,4 +26,12 @@ small.hide-text {
 	line-height: 1.5em;
 	height: 4.5em;
 	overflow: hidden; 
+}
+
+div.breadcrumb ul li a {
+	color: hsl(210, 80%, 60%) !important;
+}
+
+div.breadcrumb ul li.is-active {
+	color: hsl(0, 0%, 50%) !important;
 }
