@@ -32,6 +32,9 @@ class BlogPost(models.Model):
 	def get_truncated_body(self):
 		return Truncator(self.body).chars(250)
 
+	def get_ordered_comments(self):
+		return self.comments.order_by('-created_at')
+
 @receiver(post_delete, sender=BlogPost)
 def submission_delete(sender, instance, *args, **kwargs):
 	instance.image.delete(False)
@@ -43,7 +46,7 @@ def pre_save_blogpost_receiver(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_blogpost_receiver, sender=BlogPost)
 
 class BlogComment(models.Model):
-	message = models.CharField(max_length=170, blank=False)
+	message = models.CharField(max_length=600, blank=False)
 	article = models.ForeignKey(BlogPost, related_name='comments', on_delete=models.CASCADE)
 	created_by = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)

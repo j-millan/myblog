@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost, BlogCategory
+from .models import BlogPost, BlogCategory, BlogComment
 
 class SearchForm(forms.Form):
 	query = forms.CharField(
@@ -23,3 +23,13 @@ class NewArticleForm(forms.ModelForm):
 	class Meta:
 		model = BlogPost
 		fields = ['title', 'thumbnail', 'body', 'categories', ]
+
+class NewCommentForm(forms.ModelForm):
+	message = forms.CharField(
+		widget=forms.Textarea(attrs={'rows': 3}),
+		required=True
+	)
+
+	class Meta:
+		model = BlogComment
+		fields = ['message', ]

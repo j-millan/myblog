@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, FormView, DetailView, CreateView, UpdateView
 from django.views.generic.base import ContextMixin
+from django.views.generic.edit import FormMixin
 from django.utils.decorators import method_decorator
-from .forms import SearchForm, NewArticleForm
-from .models import BlogPost, UserFollowing
+from .forms import SearchForm, NewArticleForm, NewCommentForm
+from .models import BlogPost, UserFollowing, BlogComment
 
 def order_by_attribute(listset, attr):
 	l = list(listset)
@@ -38,23 +40,36 @@ class BlogPostCreateView(CreateView, SearchFormMixin):
 class HomeView(TemplateView, SearchFormMixin):
 	template_name = 'blog/home.html'
 
-	def get_context_data(self):
-		context = super().get_context_data()
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
 		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
 		context['popular_articles'] = order_by_attribute(BlogPost.objects.all(), 'comments')[:12]
 		context['popular_authors'] = order_by_attribute(User.objects.all()[:12], 'followers')
 		return context
 
-class BlogPostDetailView(DetailView, SearchFormMixin):
-    model = BlogPost
-    context_object_name = 'article'
-    slug_url_kwarg = 'slug'
-    template_name = "blog/blog_post.html"
+class BlogPostDetailView(CreateView, SearchFormMixin):
+	model = BlogComment
+	form_class = NewCommentForm
+	template_name = "blog/blog_post.html"
+
+	def form_valid(self, form):
+		article = get_object_or_404(BlogPost, slug=self.kwargs['slug'])
+		self.object = form.save(commit=False)
+		self.object.created_by = self.request.user
+		self.object.article = article
+		self.object.save()
+		return redirect('blog:article', slug=article.slug)
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['article'] = get_object_or_404(BlogPost, slug=self.kwargs['slug'])
+		return context
 
 class UserDetailView(DetailView, SearchFormMixin):
     model = User
     context_object_name = 'author'
     template_name = "blog/user_profile.html"
+
 
 @login_required
 def follow_author(request, pk):

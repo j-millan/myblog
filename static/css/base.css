@@ -7,20 +7,6 @@ button[type=submit].button.is-info {
 	border-bottom-right-radius: 4px !important;
 }
 
-.columns.center-v {
-	height: 100%;
-	align-items: center;
-}
-
-figure.thumbnail {
-	background-position: center;
-	background-size: cover;
-}
-
-.has-text-brown {
-    color: hsl(0, 27%, 56%) !important;
-}
-
 small.hide-text {
 	display: block;
 	line-height: 1.5em;
@@ -34,4 +20,22 @@ div.breadcrumb ul li a {
 
 div.breadcrumb ul li.is-active {
 	color: hsl(0, 0%, 50%) !important;
+}
+
+figure.thumbnail {
+	background-position: center;
+	background-size: cover;
+}
+
+.has-text-brown {
+    color: hsl(0, 27%, 56%) !important;
+}
+
+.columns.center-v {
+	height: 100%;
+	align-items: center;
+}
+
+.profile-picture {
+	border-radius: 50%;
 }

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% load inclusion_tags %}
+{% load static inclusion_tags widget_tweaks form_tags %}
+
+{% block stylesheet %}
+	{% static "css/blog_post.css" %}
+{% endblock stylesheet %}
 
 {% block title %}
 	{{ article.title }}
@@ -40,33 +44,69 @@
 
 {% block content %}
 	<div class="columns">
-		<div class="column content px-6 mr-6">
-			<div class="tags mb-1">
-				{% for category in article.categories.all %}
-					{% render_tag category %}
-				{% endfor %}
+		<div class="column content px-6 ml-4 mr-6">
+			<div>
+				<div class="tags mb-1">
+					{% for category in article.categories.all %}
+						{% render_tag category %}
+					{% endfor %}
+				</div>
+				<hr class="mt-1 mb-3">
+				<p class="title is-5 has-text-centered mb-2">
+					{{ article.title }}
+				</p>
+				<p class="is-5 has-text-centered" title="{{ article.date_published}}">
+					<span class="icon">
+						<i class="fas fa-calendar-alt"></i>
+					</span>
+					{{ article.date_published|date:"d.m.Y" }}</p>
+				<figure class="image is-fullwidth is-16by9 mx-0 my-0">
+					<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
+				</figure>
+				<div class="body is-size-5-desktop mt-4 px-3">
+					{{ article.get_body_as_markdown }}
+				</div>
 			</div>
-			<hr class="mt-1 mb-3">
-			<p class="title is-5 has-text-centered mb-2">
-				{{ article.title }}
-			</p>
-			<p class="is-5 has-text-centered" title="{{ article.date_published}}">
-				<span class="icon">
-					<i class="fas fa-calendar-alt"></i>
-				</span>
-				{{ article.date_published|date:"d.m.Y" }}</p>
-			<figure class="image is-fullwidth is-16by9 mx-0 my-0">
-				<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
-			</figure>
-			<div class="body is-size-5-desktop mt-4">
-				{{ article.get_body_as_markdown }}
+			<hr>
+			<div class="mb-4">
+				{% if user.is_authenticated %}
+					<form method="post" novalidate>
+						{% csrf_token %}
+						<p class="label title is-5">Leave a comment!</p>
+						<div class="field">
+							<div class="control">
+								{% render_field form.message class=form.message|input_class placeholder="Nice post!" %}
+							</div>
+							{% field_errors form.message %}
+						</div>
+						<button type="submit" class="button is-dark is-fullwidth">Add comment</button>
+					</form>
+				{% endif %}
 			</div>
+			<p class="has-text-grey-dark is-size-5 mb-5">{{ article.comments.count }} comments</p>
+			{% for comment in article.get_ordered_comments %}
+				<div class="columns box py-1 px-1 mb-5 mx-1">
+					<div class="column is-2 px-2">
+						<figure class="image thumbnail is-square mx-0 profile-picture" style="background-image: url({{ comment.created_by.profile.profile_picture.url }});"></figure>
+					</div>
+					<div class="column pb-1 is-fullheight">			
+						<div class="columns is-8 mb-0">
+							<p class="column mb-0 pb-0"><strong><a href="{% url 'blog:author_profile' comment.created_by.pk %}" class="has-text-grey-dark">{{ comment.created_by.username }}</strong></a> says:</p>
+							<small class="column has-text-grey has-text-right pr-3">{{ comment.created_at }}</small>		
+						</div> 
+						<p>{{ comment.message}}</p>
+						{% if user == comment.created_by %}
+							<a href="#" class="is-block has-text-right has-text-grey mb-1">edit</a>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}
 		</div>
-		<div class="column is-one-fifth mt-2 px-4">
+		<div class="column is-one-fifth mt-2 mr-4 pl-0">
 			<p class="level is-size-5">About the author:</p>
 			<div class="columns">
 				<div class="column is-4 is-3-mobile px-0 py-0">
-					<figure class="image thumbnail is-1by1 has-background-link-light" style="background-image: url({{ article.author.profile.profile_picture.url }}); border-radius: 50%;"></figure>
+					<figure class="image thumbnail is-1by1 has-background-link-light profile-picture" style="background-image: url({{ article.author.profile.profile_picture.url }});"></figure>
 				</div>
 				<p class="title-6 column pr-0 pb-0 is-vcentered">
 					{{ article.author.profile.get_full_name }}
