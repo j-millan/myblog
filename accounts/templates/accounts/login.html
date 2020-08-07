@@ -8,6 +8,7 @@
 {% block content %}
 	<form method="post" novalidate>
 		{% csrf_token %}
+		<input type="hidden" name='next' value="{{ next }}">
 		{% include "includes/form_errors.html" %}
 		{% render_field_with_icon form.username 'fas fa-user' label=False margin_bottom="" %}
 		{% render_field_with_icon form.password 'fas fa-lock' label=False margin_bottom="" %}

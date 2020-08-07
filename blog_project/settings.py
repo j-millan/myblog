@@ -127,7 +127,7 @@ LOGIN_URL = 'accounts:login'
 LOGOUT_URL = 'accounts:logout'
 
 LOGIN_REDIRECT_URL = 'blog:home'
-LOGOUT_REDIRECT_URL = 'blog:home'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
