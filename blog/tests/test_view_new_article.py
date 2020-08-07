@@ -49,6 +49,7 @@ class NewArticleViewTests(NewArticleViewTestCase):
 	def test_form_inputs(self):
 		self.assertContains(self.response, '<input', 5)
 		self.assertContains(self.response, '<textarea', 1)
+		self.assertContains(self.response, 'type="file"', 1)
 		self.assertContains(self.response, 'id="id_categories"', 1)
 
 class SuccessfulNewArticleViewTests(NewArticleViewTestCase):

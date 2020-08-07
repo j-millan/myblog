@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from ..views import HomeView
 from ..models import BlogPost
 from ..forms import SearchForm
+from .cases import UserLoginTestCase
 
-class HomeViewTests(TestCase):
+class HomeViewTests(UserLoginTestCase):
 	def setUp(self):
 		self.url = reverse('blog:home')
 		self.response = self.client.get(self.url)
@@ -31,8 +32,8 @@ class HomeViewTests(TestCase):
 		self.assertContains(self.response, f'href="{signup_url}"')
 
 	def test_contains_new_article_button(self):
+		super().setUp()
 		new_post_url = reverse('blog:new_article')
-		user = User.objects.create_user(username='username', password='123')
-		self.client.login(username='username', password='123')
+		self.client.login(username=self.username, password=self.password)
 		response = self.client.get(self.url)
 		self.assertContains(response, f'href="{new_post_url}"')

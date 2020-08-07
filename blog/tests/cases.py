@@ -3,6 +3,12 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from accounts.models import Profile
 
+class UserLoginTestCase(TestCase):
+	def setUp(self):
+		self.username = 'username'
+		self.password = '123'
+		self.user = User.objects.create_user(username=self.username, password=self.password)
+
 class AuthorProfileViewTestCase(TestCase):
 	def setUp(self):
 		self.username = 'username'
