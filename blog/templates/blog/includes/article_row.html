@@ -1,13 +1,14 @@
 {% load inclusion_tags %}
 <div class="column is-full mb-5">
-	<div class="columns box px-0 py-0">
-		<div class="column is-4 py-3 px-3">
-			<figure class="image thumbnail is-16by9" style="background-image: url({{ article.thumbnail.url }});"></figure>
+	<div class="columns box is-mobile px-0 py-0">
+		<div class="column is-4-desktop is-5-mobile  py-3 px-3">
+			<figure class="image thumbnail is-16by9 is-hidden-mobile" style="background-image: url({{ article.thumbnail.url }});"></figure>
+			<figure class="image thumbnail is-4by3 is-hidden-desktop" style="background-image: url({{ article.thumbnail.url }});"></figure>
 		</div>
 		<div class="column pl-2">
 			<div class="columns pt-2 mb-0">
-				<a href="{% url 'blog:article' article.slug %}" class="column title is-9 is-6 has-text-dark mb-1 pr-1 pb-1">{{ article.title }}</a>
-				<small class="column has-text-right has-text-grey pr-5 pl-1 pb-1">{{ article.date_published|date:"M n, H:i" }}</small>
+				<a href="{% url 'blog:article' article.slug %}" class="column title is-9 is-6 has-text-dark mb-0 pr-1 pb-1">{{ article.title }}</a>
+				<small class="column has-text-right is-hidden-mobile has-text-grey pl-1 pr-5 pb-1 pt-1">{{ article.date_published|date:"M n, H:i" }}</small>
 			</div>
 			<small class="has-text-grey hide-text pr-2">
 				{{ article.get_truncated_body }}

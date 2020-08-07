@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% load inclusion_tags %}
+{% load static inclusion_tags %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{% static "css/user_profile.css" %}">
+{% endblock stylesheets %}
 
 {% block title %}
 	{{ author.username }}'s profile
@@ -32,7 +36,7 @@
 
 {% block content %}
 	<div class="columns">
-		<div class="column is-one-fifth is-full-mobile is-full-tablet">
+		<div class="column is-one-fifth is-full-mobile">
 			<div class="box px-5 mb-1">
 				<figure class="image thumbnail is-1by1 profile-picture has-background-link-light mx-0" style="background-image: url({{ author.profile.profile_picture.url }});">
 				</figure>
@@ -73,10 +77,16 @@
 				{% endif %}
 			{% endif %}
 		</div>
-		<div class="column is-multiline">
-			{% for article in author.profile.get_ordered_posts %}
-				{% include "blog/includes/article_row.html" %}
-			{% endfor %}
+		<div class="is-hidden-desktop">
+			<hr>
+			<p class="title is-4 ml-4">Articles:</p>
+		</div>
+		<div class="column pt-5 ml-3">
+			<div class="columns is-mobile is-multiline is-centered" >
+				{% for article in author.profile.get_ordered_posts %}
+					{% include "blog/includes/article_row.html" %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock content %}

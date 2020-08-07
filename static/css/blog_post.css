@@ -1,5 +1,13 @@
-div.is-full-mobile {
-	margin-left: 3% !important;
-	margin-right: 5% !important;
-	padding-right: 5%;
+@media screen and (max-width: 769px) {
+	div.is-full-mobile {
+		margin-left: 0 !important;
+		margin-right: 1% !important;
+	}
+}
+
+@media screen and (min-width: 770px) {
+	div.is-full-mobile {
+		margin-left: 5% !important;
+		margin-right: 7% !important;
+	}
 }

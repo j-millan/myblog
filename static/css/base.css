@@ -7,13 +7,6 @@ button[type=submit].button.is-info {
 	border-bottom-right-radius: 4px !important;
 }
 
-small.hide-text {
-	display: block;
-	line-height: 1.5em;
-	height: 4.5em;
-	overflow: hidden; 
-}
-
 div.breadcrumb ul li a {
 	color: hsl(210, 80%, 60%) !important;
 }
