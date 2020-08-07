@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static inclusion_tags widget_tweaks form_tags %}
 
-{% block stylesheet %}
-	{% static "css/blog_post.css" %}
-{% endblock stylesheet %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{% static "css/blog_post.css" %}">
+{% endblock stylesheets %}
 
 {% block title %}
 	{{ article.title }}
@@ -44,7 +44,7 @@
 
 {% block content %}
 	<div class="columns">
-		<div class="column content px-6 ml-4 mr-6">
+		<div class="column content is-full-mobile">
 			<div>
 				<div class="tags mb-1">
 					{% for category in article.categories.all %}
@@ -85,14 +85,14 @@
 			</div>
 			<p class="has-text-grey-dark is-size-5 mb-5">{{ article.comments.count }} comments</p>
 			{% for comment in article.get_ordered_comments %}
-				<div class="columns box py-1 px-1 mb-5 mx-1">
-					<div class="column is-2 px-2">
+				<div class="columns box py-1 px-1 mb-5 mx-1 is-mobile">
+					<div class="column is-2 is-2-mobile px-2">
 						<figure class="image thumbnail is-square mx-0 profile-picture" style="background-image: url({{ comment.created_by.profile.profile_picture.url }});"></figure>
 					</div>
-					<div class="column pb-1 is-fullheight">			
-						<div class="columns is-8 mb-0">
+					<div class="column pb-1">			
+						<div class="columns mb-0 is-mobile">
 							<p class="column mb-0 pb-0"><strong><a href="{% url 'blog:author_profile' comment.created_by.pk %}" class="has-text-grey-dark">{{ comment.created_by.username }}</strong></a> says:</p>
-							<small class="column has-text-grey has-text-right pr-3">{{ comment.created_at }}</small>		
+							<small class="column  has-text-grey has-text-right pr-3">{{ comment.created_at }}</small>		
 						</div> 
 						<p>{{ comment.message}}</p>
 						{% if user == comment.created_by %}
@@ -102,6 +102,7 @@
 				</div>
 			{% endfor %}
 		</div>
+		<hr class="is-hidden-desktop">
 		<div class="column is-one-fifth mt-2 mr-4 pl-0">
 			<p class="level is-size-5">About the author:</p>
 			<div class="columns">

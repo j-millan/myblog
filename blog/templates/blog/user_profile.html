@@ -32,9 +32,9 @@
 
 {% block content %}
 	<div class="columns">
-		<div class="column is-one-fifth">
+		<div class="column is-one-fifth is-full-mobile is-full-tablet">
 			<div class="box px-5 mb-1">
-				<figure class="image thumbnail is-1by1 has-background-link-light" style="background-image: url({{ author.profile.profile_picture.url }}); border-radius: 50%;">
+				<figure class="image thumbnail is-1by1 profile-picture has-background-link-light mx-0" style="background-image: url({{ author.profile.profile_picture.url }});">
 				</figure>
 				<div class="info mt-3">
 					<p class="title-6">{{ author.profile.get_full_name }}</p>

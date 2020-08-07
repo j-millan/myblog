@@ -29,7 +29,7 @@
 				{% csrf_token %}
 				<div class="field columns">
 					<div class="column is-5">
-						<figure class="image thumbnail is-1by1" id="picPreview" style="background-image: url({{ user.profile.profile_picture.url }}); box-shadow: 0px 0px 1px 2px hsl(0, 0%, 65%); border-radius: 50%;"></figure>
+						<figure class="image thumbnail profile-picture is-1by1" id="picPreview" style="background-image: url({{ user.profile.profile_picture.url }}); box-shadow: 0px 0px 3px 1px hsl(0, 0%, 65%);"></figure>
 					</div>
 					<div class="column">
 						<label class="label">{{ form.profile_picture.label_tag }}</label>
