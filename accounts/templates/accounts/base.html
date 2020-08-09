@@ -3,11 +3,12 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{% static "css/accounts.css" %}">
+	<link href="https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,900;1,700&display=swap" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block body %}
 	<div class="columns center-v px-6">
-		<div class="column is-half px-6">
+		<div class="column is-half px-6 is-hidden-mobile">
 			<a href="{% url 'blog:home' %}">
 				<div class="columns is-centered">	
 					<figure class="column image is-half">
@@ -16,9 +17,12 @@
 				</div>
 			</a>
 		</div>
-		<div class="vl"></div>
-		<div class="column is-half px-6">
-			<div class="pl-6 pr-4">
+		<div class="vl is-hidden-mobile"></div>
+		<div class="form column is-half px-6">
+			<figure class="column image is-2by1 mx-6 mb-5 py-6 px-6 is-hidden-desktop">
+				<img src="{% static "img/logopng.png" %}" alt="myblog logo">
+			</figure>
+			<div class="form pl-6 pr-4">
 				{% block content %}
 					
 				{% endblock content %}

@@ -24,7 +24,7 @@ figure.thumbnail {
     color: hsl(0, 27%, 56%) !important;
 }
 
-.columns.center-v {
+.center-v {
 	height: 100%;
 	align-items: center;
 }

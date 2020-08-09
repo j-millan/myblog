@@ -52,14 +52,18 @@
 					{% endfor %}
 				</div>
 				<hr class="mt-1 mb-3">
-				<p class="title is-5 has-text-centered mb-2">
+				<p class="title is-5 is-size-6-mobile has-text-centered mb-2">
 					{{ article.title }}
 				</p>
 				<p class="is-5 has-text-centered" title="{{ article.date_published}}">
 					<span class="icon">
 						<i class="fas fa-calendar-alt"></i>
 					</span>
-					{{ article.date_published|date:"d.m.Y" }}</p>
+					{{ article.date_published|date:"d.m.Y" }} 
+					<span class="is-hidden-desktop"> by
+						<a href="{% url 'blog:author_profile' article.author.pk %}" class="has-text-grey">{{ article.author.username }}</a>
+					</span>
+				</p>
 				<figure class="image is-fullwidth is-16by9 mx-0 my-0">
 					<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
 				</figure>

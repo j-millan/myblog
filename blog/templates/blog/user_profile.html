@@ -10,28 +10,37 @@
 {% endblock title %}
 
 {% block breadcrumb %}
-	<li>
-		<a href="{% url 'blog:home' %}">
+	{% if author == user %}
+		<li>
 			<span class="icon is-small">
-				<i class="fas fa-home" aria-hidden="true"></i>
+				<i class="fas fa-user" aria-hidden="true"></i>
 			</span>
-			Home
-		</a>
-	</li>
-	<li>
-		<a href="#">
+			User
+		</li>
+	{% else %}
+		<li>
+			<a href="{% url 'blog:home' %}">
+				<span class="icon is-small">
+					<i class="fas fa-home" aria-hidden="true"></i>
+				</span>
+				Home
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<span class="icon is-small">
+					<i class="fas fa-user-edit" aria-hidden="true"></i>
+				</span>
+				Authors
+			</a>
+		</li>
+		<li class="is-active">
 			<span class="icon is-small">
-				<i class="fas fa-user-edit" aria-hidden="true"></i>
+				<i class="fas fa-user" aria-hidden="true"></i>
 			</span>
-			Authors
-		</a>
-	</li>
-	<li class="is-active">
-		<span class="icon is-small">
-			<i class="fas fa-user" aria-hidden="true"></i>
-		</span>
-		{{ author.username }}'s profile
-	</li>
+			{{ author.username }}'s profile
+		</li>
+	{% endif %}
 {% endblock breadcrumb %}
 
 {% block content %}
