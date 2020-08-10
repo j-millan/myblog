@@ -100,7 +100,7 @@
 						</div> 
 						<p class="mb-0">{{ comment.message}}</p>
 						{% if user == comment.created_by %}
-							<a href="#" class="is-block has-text-right has-text-grey">edit</a>
+							<a href="{% url 'blog:edit_comment' article.slug comment.pk %}" class="is-block has-text-right has-text-grey">edit</a>
 						{% endif %}
 					</div>
 				</div>

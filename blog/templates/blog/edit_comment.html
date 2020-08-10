@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load widget_tweaks form_tags %}
+
+{% block title %}
+	Edit comment
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:home' %}">
+			<span class="icon is-small">
+				<i class="fas fa-home" aria-hidden="true"></i>
+			</span>
+			Home
+		</a>
+	</li>
+	<li>
+		<a href="#">
+			<span class="icon is-small">
+				<i class="fas fa-user-edit" aria-hidden="true"></i>
+			</span>
+			Authors
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'blog:author_profile' comment.article.author.pk %}">
+			<span class="icon is-small">
+				<i class="fas fa-user" aria-hidden="true"></i>
+			</span>
+			{{ comment.article.author.username }}
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'blog:article' comment.article.slug %}">
+			<span class="icon is-small">
+				<i class="fas fa-book-reader" aria-hidden="true"></i>
+			</span>
+			{{ comment.article.title }}
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-edit"></i>
+		</span>
+		Edit comment
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<form method="post" novalidate>
+		{% csrf_token %}
+
+		<div class="field">
+			<label class="label">{{ form.message.label_tag }}</label>
+			<div class="control">
+				{% render_field form.message class=form.message|input_class %}
+			</div>
+			{% field_errors form.message %}
+		</div>
+		<div class="buttons">
+			<button type="submit" class="button is-success">Apply changes</button>
+			<a href="{% url 'blog:article' comment.article.slug %}" class="button is-danger">Cancel</a>
+		</div>
+	</form>
+{% endblock content %}

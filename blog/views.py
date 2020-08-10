@@ -37,6 +37,24 @@ class BlogPostCreateView(CreateView, SearchFormMixin):
     	form.save_m2m()
     	return redirect('blog:article', slug=article.slug)
 
+@method_decorator(login_required, name='dispatch')
+class BlogCommentUpdateView(UpdateView):
+    model = BlogComment
+    form_class = NewCommentForm
+    template_name = "blog/edit_comment.html"
+
+    def get(self, request, *args, **kwargs):
+    	comment = self.get_object()
+    	form = NewCommentForm()
+    	form.initial['message'] = comment.message
+    	if request.user == comment.created_by:
+    		return render(request, 'blog/edit_comment.html', {'comment': comment, 'form': form})
+    	
+    	return redirect('blog:article', slug=self.kwargs['slug'])
+
+    def get_success_url(self):
+    	return reverse_lazy('blog:article', kwargs={'slug': self.kwargs['slug']})
+
 class HomeView(TemplateView, SearchFormMixin):
 	template_name = 'blog/home.html'
 
