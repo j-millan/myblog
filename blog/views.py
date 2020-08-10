@@ -43,8 +43,8 @@ class HomeView(TemplateView, SearchFormMixin):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
-		context['popular_articles'] = order_by_attribute(BlogPost.objects.all(), 'comments')[:12]
-		context['popular_authors'] = order_by_attribute(User.objects.all()[:12], 'followers')
+		context['popular_articles'] = context['latest_articles']
+		context['popular_authors'] = User.objects.all()[:12]
 		return context
 
 class BlogPostDetailView(CreateView, SearchFormMixin):
