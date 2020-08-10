@@ -5,6 +5,8 @@
 	Edit profile
 {% endblock title %}
 
+{% block search_form %}{% endblock search_form %}
+
 {% block breadcrumb %}
 	<li>
 		<a href="{% url 'blog:author_profile' user.pk %}">

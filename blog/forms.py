@@ -5,7 +5,7 @@ class SearchForm(forms.Form):
 	query = forms.CharField(
 		max_length=75,
 		required=True,
-		widget=forms.TextInput(attrs={'placeholder': 'search...'})
+		widget=forms.TextInput(attrs={'placeholder': 'Search content...'})
 	)
 
 class NewArticleForm(forms.ModelForm):

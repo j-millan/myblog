@@ -31,20 +31,22 @@
 					</div>
 					<div class="navbar-end">
 						<div class="navbar-item">
-							<form method="post" action="{% url 'blog:search_results' %}" novalidate>
-								{% csrf_token %}
-								<div class="field has-addons">
-									<div class="control">
-										{% render_field search_form.query class="input" %}
+							{% block search_form %}
+								<form method="post" action="{% url 'blog:search_results' %}" novalidate>
+									{% csrf_token %}
+									<div class="field has-addons">
+										<div class="control">
+											{% render_field search_form.query class="input" %}
+										</div>
+										<div class="control">
+											<button type="submit" class="button is-info">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+										</p>
 									</div>
-									<div class="control">
-										<button type="submit" class="button is-info">
-											<i class="fas fa-search"></i>
-										</button>
-									</div>
-									</p>
-								</div>
-							</form>
+								</form>
+							{% endblock search_form %}
 							{% if user.is_authenticated %}
 								<a href="{% url 'blog:new_article' %}" title="create article" class="button is-primary ml-2">
 									<span class="icon is-small">
