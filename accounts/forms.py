@@ -51,8 +51,10 @@ class UpdateProfileForm(forms.ModelForm):
 			attrs={'rows': 4, 'placeholder': 'About me'}
 		),
 		required=False,
+		help_text = 'Max characters amount is 250.'
 	)
 
 	class Meta:
 		model = Profile
 		fields = ['profile_picture', 'about', 'phone_number', 'instagram_profile', 'facebook_page', 'twitter_profile']
+		help_texts = {'profile_picture': 'Square images are recomended.'}

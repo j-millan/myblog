@@ -81,6 +81,7 @@
 							<div class="control">
 								{% render_field form.message class=form.message|input_class placeholder="Nice post!" %}
 							</div>
+							<p class="help">{{ form.message.help_text }}</p>
 							{% field_errors form.message %}
 						</div>
 						<button type="submit" class="button is-dark is-fullwidth">Add comment</button>

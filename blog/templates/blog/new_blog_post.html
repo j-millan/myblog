@@ -35,14 +35,13 @@
 				<div class="field mb-4">
 					<label class="label">{{ form.thumbnail.label_tag }}</label>
 					{% render_field form.thumbnail %}
-					<p class="help is-white-ter">Images with a 16x9 aspect ratio are recomemnded.</p>
+					<p class="help">{{ form.thumbnail.help_text }}</p>
 					{% field_errors form.thumbnail %}
 				</div>
 				<div class="field mb-4">
 					<label class="label">{{ form.body.label_tag }}</label>
-					<div class="control">
-						{% render_field form.body class=form.body|input_class placeholder="Welcome to my article..." %}
-					</div>
+					{% render_field form.body class=form.body|input_class placeholder="Welcome to my article..." %}
+					<p class="help mt-0 pt-0">{{ form.body.help_text }}</p>
 					{% field_errors form.body %}
 				</div>
 				<div class="field mb-4 categories">

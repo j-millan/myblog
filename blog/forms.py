@@ -11,8 +11,9 @@ class SearchForm(forms.Form):
 class NewArticleForm(forms.ModelForm):
 	body = forms.CharField(
 		widget=forms.Textarea(
-			attrs={'rows': 15, 'placeholder': 'XD'}
+			attrs={'rows': 15, 'placeholder': 'My first article!'}
 		),
+		help_text = 'Max characters amount is 25000.'
 	)
 
 	categories = forms.ModelMultipleChoiceField(
@@ -23,11 +24,12 @@ class NewArticleForm(forms.ModelForm):
 	class Meta:
 		model = BlogPost
 		fields = ['title', 'thumbnail', 'body', 'categories', ]
+		help_texts = {'thumbnail': 'Images with a 16x9 aspect ratio are recomemnded.'}
 
 class NewCommentForm(forms.ModelForm):
 	message = forms.CharField(
 		widget=forms.Textarea(attrs={'rows': 3}),
-		required=True
+		help_text = 'Max characters amount is 600. Comments do not allow Markdown.'
 	)
 
 	class Meta:

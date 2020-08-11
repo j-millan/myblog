@@ -36,14 +36,14 @@
 					<div class="column">
 						<label class="label">{{ form.profile_picture.label_tag }}</label>
 						{% render_field form.profile_picture id="imgInput" %}
-						<p class="help is-white-ter">Square images are recomended.</p>
+						<p class="help">{{ form.profile_picture.help_text }}</p>
 						{% field_errors form.profile_picture %}
 					</div>
 				</div>
 				<div class="field mb-4">
 					<label class="label">{{ form.about.label_tag }}</label>
 					{% render_field form.about class=form.about|input_class %}
-					<p class="help">Max characters amount is 250.</p>
+					<p class="help">{{ form.about.help_text }}</p>
 					{% field_errors form.about %}
 				</div>
 				{% render_field_with_icon form.phone_number 'fas fa-phone' placeholder='0 426 684 3456' %}
