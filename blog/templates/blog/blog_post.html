@@ -68,6 +68,7 @@
 					<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
 				</figure>
 				<div class="body is-size-5-desktop mt-4 px-3">
+					<p>{{ article.introduction }}</p>
 					{{ article.get_body_as_markdown }}
 				</div>
 			</div>

@@ -39,8 +39,14 @@
 					{% field_errors form.thumbnail %}
 				</div>
 				<div class="field mb-4">
+					<label class="label">{{ form.introduction.label_tag }}</label>
+					{% render_field form.introduction class=form.introduction|input_class placeholder=form.introduction.placeholder %}
+					<p class="help mt-0 pt-0">{{ form.introduction.help_text }}</p>
+					{% field_errors form.introduction %}
+				</div>
+				<div class="field mb-4">
 					<label class="label">{{ form.body.label_tag }}</label>
-					{% render_field form.body class=form.body|input_class placeholder="Welcome to my article..." %}
+					{% render_field form.body class=form.body|input_class placeholder=form.body.placeholder id="body" %}
 					<p class="help mt-0 pt-0">{{ form.body.help_text }}</p>
 					{% field_errors form.body %}
 				</div>
@@ -72,7 +78,7 @@
 
 {% block javascript %}
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	<script>
-		var simplemde = new SimpleMDE();
+	<script src="{% static "js/jquery-3.5.1.min.js" %}"></script> <script>
+		var simplemde = new SimpleMDE({element: $("#body")[0]});
 	</script>
 {% endblock javascript %}

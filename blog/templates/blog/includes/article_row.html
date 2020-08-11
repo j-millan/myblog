@@ -12,7 +12,7 @@
 				<small class="column has-text-right has-text-left-mobile has-text-grey pl-2 pr-5 pb-1 pt-0">{{ article.date_published|date:"M n, H:i" }}</small>
 			</div>
 			<small class="has-text-grey hide-text is-hidden-mobile  pr-2">
-				{{ article.get_truncated_body }}
+				{{ article.get_truncated_introduction }}
 			</small>
 			<div class="tags mt-3">
 				{% for category in article.categories.all %}

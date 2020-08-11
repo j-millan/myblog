@@ -13,7 +13,14 @@ class NewArticleForm(forms.ModelForm):
 		widget=forms.Textarea(
 			attrs={'rows': 15, 'placeholder': 'My first article!'}
 		),
-		help_text = 'Max characters amount is 25000.'
+		help_text='Max characters amount is 25000.'
+	)
+
+	introduction = forms.CharField(
+		widget=forms.Textarea(
+			attrs={'rows': 3, 'placeholder': 'Welcome to my article.'}
+		),
+		help_text='Introduction does not allow Markdown. More than one paragraph is not recommended. Max characters amount is 400.'
 	)
 
 	categories = forms.ModelMultipleChoiceField(
@@ -23,13 +30,13 @@ class NewArticleForm(forms.ModelForm):
 
 	class Meta:
 		model = BlogPost
-		fields = ['title', 'thumbnail', 'body', 'categories', ]
+		fields = ['title', 'thumbnail', 'introduction', 'body', 'categories', ]
 		help_texts = {'thumbnail': 'Images with a 16x9 aspect ratio are recomemnded.'}
 
 class NewCommentForm(forms.ModelForm):
 	message = forms.CharField(
 		widget=forms.Textarea(attrs={'rows': 3}),
-		help_text = 'Max characters amount is 600. Comments do not allow Markdown.'
+		help_text='Max characters amount is 600. Comments do not allow Markdown.'
 	)
 
 	class Meta:

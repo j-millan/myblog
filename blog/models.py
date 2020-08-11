@@ -15,6 +15,7 @@ def upload_location(instance, filename):
 
 class BlogPost(models.Model):
 	title = models.CharField(max_length=75, null=False, blank=False, unique=True)
+	introduction = models.TextField(max_length=400, null=False, blank=False)
 	body = models.TextField(max_length=25000, null=False, blank=False)
 	thumbnail = models.ImageField(upload_to=upload_location, default='img/blog_thumbnails/default.jpg')
 	author = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE, null=False)
@@ -29,8 +30,8 @@ class BlogPost(models.Model):
 	def get_body_as_markdown(self):
 		return mark_safe(markdown(self.body, safe_mode='escape'))
 
-	def get_truncated_body(self):
-		return Truncator(self.body).chars(250)
+	def get_truncated_introduction(self):
+		return Truncator(self.introduction).chars(250)
 
 	def get_ordered_comments(self):
 		return self.comments.order_by('-created_at')
