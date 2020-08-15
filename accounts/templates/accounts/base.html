@@ -8,6 +8,19 @@
 
 {% block body %}
 	<div class="columns center-v px-6">
+		{% block left %}
+			<div class="form column is-half px-6">
+				<figure class="column image is-2by1 mx-6 mb-5 py-6 px-6 is-hidden-desktop">
+					<img src="{% static "img/logopng.png" %}" alt="myblog logo">
+				</figure>
+				<div class="form pl-6 pr-4">
+					{% block content_left %}
+						
+					{% endblock content_left %}
+				</div>
+			</div>
+			<div class="vl is-hidden-mobile"></div>
+		{% endblock left %}
 		<div class="column is-half px-6 is-hidden-mobile">
 			<a href="{% url 'blog:home' %}">
 				<div class="columns is-centered">	
@@ -17,16 +30,18 @@
 				</div>
 			</a>
 		</div>
-		<div class="vl is-hidden-mobile"></div>
-		<div class="form column is-half px-6">
-			<figure class="column image is-2by1 mx-6 mb-5 py-6 px-6 is-hidden-desktop">
-				<img src="{% static "img/logopng.png" %}" alt="myblog logo">
-			</figure>
-			<div class="form pl-6 pr-4">
-				{% block content %}
-					
-				{% endblock content %}
+		{% block right %}
+			<div class="vl is-hidden-mobile"></div>
+			<div class="form column is-half px-6">
+				<figure class="column image is-2by1 mx-6 mb-5 py-6 px-6 is-hidden-desktop">
+					<img src="{% static "img/logopng.png" %}" alt="myblog logo">
+				</figure>
+				<div class="form pl-6 pr-4">
+					{% block content_right %}
+						
+					{% endblock content_right %}
+				</div>
 			</div>
-		</div>
+		{% endblock right %}
 	</div>
 {% endblock body %}

@@ -25,12 +25,13 @@ def field_errors(field):
 	return context
 
 @register.inclusion_tag('inclusion_tags/field_with_icon.html')
-def render_field_with_icon(field, icon_class, placeholder=False, label=True, margin_bottom='mb-4'):
+def render_field_with_icon(field, icon_class, placeholder=False, label=True, margin_bottom='mb-4', help_text=True):
 	context = {
 		'field': field, 
 		'icon_class': icon_class, 
 		'placeholder': placeholder,
 		'label': label,
-		'margin': margin_bottom
+		'margin': margin_bottom,
+		'help_text': help_text
 	}
 	return context

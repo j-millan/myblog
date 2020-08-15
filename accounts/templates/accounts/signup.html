@@ -5,7 +5,11 @@
 	Sign up
 {% endblock title %}
 
-{% block content %}
+{% block left %}
+	
+{% endblock left %}
+
+{% block content_right %}
 	<form method="post" novalidate>
 		{% csrf_token %}
 		{% include "includes/form_errors.html" %}
@@ -22,7 +26,7 @@
 		{% render_field_with_icon form.email 'fas fa-envelope' label=False margin_bottom="mb-3" %}
 		<div class="field -is-horizontal">
 			<div class="field-body">
-				{% render_field_with_icon form.password1 'fas fa-lock' label=False margin_bottom="" %}
+				{% render_field_with_icon form.password1 'fas fa-lock' label=False margin_bottom="" help_text=False %}
 				<div class="field">
 					{% render_field form.password2 class=form.password2|input_class placeholder="Password confirmation" %}
 					{% field_errors form.password2 %}
@@ -36,4 +40,4 @@
 		Already have an account?
 		<a href="{% url 'accounts:login' %}">Log in</a>.
 	</small>
-{% endblock content %}
+{% endblock content_right %}

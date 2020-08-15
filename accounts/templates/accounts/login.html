@@ -5,7 +5,11 @@
 	Log in
 {% endblock title %}
 
-{% block content %}
+{% block left %}
+	
+{% endblock left %}
+
+{% block content_right %}
 	<form method="post" novalidate>
 		{% csrf_token %}
 		<input type="hidden" name='next' value="{{ next }}">
@@ -19,4 +23,4 @@
 		New to MyBlog?
 		<a href="{% url 'accounts:signup' %}">Sign up</a>.
 	</small>
-{% endblock content %}
+{% endblock content_right %}
