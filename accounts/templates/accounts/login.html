@@ -19,8 +19,13 @@
 		<hr>
 		<button type="submit" class="button is-fullwidth is-info is-full mt-4">LOG IN</button>
 	</form>
-	<small class="column is-fullwidth has-text-centered has-text-grey py-3">
+	<small class="column is-fullwidth has-text-centered has-text-grey mt-2 py-0">
 		New to MyBlog?
 		<a href="{% url 'accounts:signup' %}">Sign up</a>.
+	</small>
+	<small class="column is-fullwidth has-text-centered py-0">
+		<a href="{% url 'accounts:password_reset' %}" class="has-text-grey">
+			I forgot my password
+		</a>
 	</small>
 {% endblock content_right %}
