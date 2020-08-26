@@ -111,8 +111,13 @@ def search_results(request):
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
-			articles = BlogPost.objects.all()
-			return render(request, 'blog/search_results.html', {'articles': articles, 'search_form': form, 'query': form.cleaned_data.get('query')})
+			search_query = form.cleaned_data.get('query')
+			articles = []
+			for a in (BlogPost.objects.all()):
+				if a.title.lower().find(search_query.lower()) != -1:
+					articles.append(a)
+
+			return render(request, 'blog/search_results.html', {'articles': articles, 'search_form': form, 'query': search_query})
 	
 	else:
 		form = SearchForm()
