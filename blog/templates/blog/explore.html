@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Explore
+{% endblock title %}
+
+{% block content %}
+	<p class="mb-5 subtitle is-4">Latest articles:</p>
+	<div class="columns is-multiline">
+		{% for article in latest_articles %}
+			{% include "blog/includes/article_card.html" with article=article %}
+		{% endfor %}
+	</div>
+	{% for set in category_sets %}
+		{% if set.articles|length > 0 %}
+			<p class="mb-5 mt-2 subtitle is-4">{{ set.category.name }}:</p>
+			<div class="columns is-multiline">
+				{% for article in set.articles %}
+					{% include "blog/includes/article_card.html" with article=article %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endfor %}
+	<p class="mb-2 mt-2 subtitle is-4">Popular authors:</p>
+	<div class="level">
+		<ul>
+			{% for author in popular_authors %}
+				<li><a href="{% url 'blog:author_profile' author.pk %}">{{ author.username }} - {{ author.followers.count }} followers</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock content %}

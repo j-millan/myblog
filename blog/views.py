@@ -7,7 +7,7 @@ from django.views.generic.base import ContextMixin
 from django.views.generic.edit import FormMixin
 from django.utils.decorators import method_decorator
 from .forms import SearchForm, NewArticleForm, NewCommentForm
-from .models import BlogPost, UserFollowing, BlogComment
+from .models import BlogPost, UserFollowing, BlogComment, BlogCategory
 
 def order_by_attribute(listset, attr):
 	l = list(listset)
@@ -17,6 +17,9 @@ def order_by_attribute(listset, attr):
 				l[i], l[j] = l[j], l[i]
 
 	return l
+
+def get_from_category(category):
+	return BlogPost.objects.filter(categories__in=[category])[:8]
 
 class SearchFormMixin(ContextMixin):
 	def get_context_data(self, **kwargs):
@@ -63,6 +66,21 @@ class HomeView(TemplateView, SearchFormMixin):
 		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
 		context['popular_articles'] = context['latest_articles']
 		context['popular_authors'] = User.objects.all()[:12]
+		return context
+
+class ExploreView(TemplateView):
+	template_name = "blog/explore.html"
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		category_sets = list()
+		for c in (BlogCategory.objects.all()):
+			category_set = {'category': c, 'articles': get_from_category(c)}
+			category_sets.append(category_set)
+
+		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
+		context['category_sets'] = category_sets
+		context['popular_authors'] = order_by_attribute(User.objects.all()[:20], 'followers')
 		return context
 
 class BlogPostDetailView(CreateView, SearchFormMixin):
