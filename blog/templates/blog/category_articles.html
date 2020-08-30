@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ category.name }} Posts
+{% endblock title %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{% url 'blog:home' %}">
+			<span class="icon is-small">
+				<i class="fas fa-home" aria-hidden="true"></i>
+			</span>
+			Home
+		</a>
+	</li>
+	<li>
+		<a href="{% url 'blog:explore' %}">
+			<span class="icon is-small">
+				<i class="fas fa-search" aria-hidden="true"></i>
+			</span>
+			Explore
+		</a>
+	</li>
+	<li class="is-active">
+		<span class="icon is-small">
+			<i class="fas fa-list" aria-hidden="true"></i>
+		</span>
+		{{ category.name }}
+	</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+	<p class="title is-5 mb-5">Category: {{ category.name }}</p>
+	{% if articles|length > 0 %}
+		<div class="column pt-5 is-9">
+			<div class="columns is-mobile is-multiline is-centered" >
+				{% for article in articles %}
+					{% include "blog/includes/article_row.html" %}
+				{% endfor %}
+			</div>
+		</div>
+	{% else %}
+		<p class="has-text-centered has-text-grey">No articles to show for this category.</p>
+	{% endif %}
+{% endblock content %}

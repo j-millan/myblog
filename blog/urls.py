@@ -7,6 +7,7 @@ urlpatterns = [
 	path('', views.HomeView.as_view(), name='home'),
 	path('explore/', views.ExploreView.as_view(), name='explore'),
 	path('results/', views.search_results, name='search_results'),
+	path('category/<int:pk>/', views.CategoryPostsView.as_view(), name='category'),
 	path('article/new/', views.BlogPostCreateView.as_view(), name='new_article'),
 	path('article/<slug:slug>/', views.BlogPostDetailView.as_view(), name='article'),
 	path('article/<slug:slug>/comment/<int:pk>/edit/', views.BlogCommentUpdateView.as_view(), name='edit_comment'),

@@ -18,9 +18,6 @@ def order_by_attribute(listset, attr):
 
 	return l
 
-def get_from_category(category):
-	return BlogPost.objects.filter(categories__in=[category])[:8]
-
 class SearchFormMixin(ContextMixin):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -68,19 +65,31 @@ class HomeView(TemplateView, SearchFormMixin):
 		context['popular_authors'] = User.objects.all()[:12]
 		return context
 
-class ExploreView(TemplateView):
+class ExploreView(TemplateView, SearchFormMixin):
 	template_name = "blog/explore.html"
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		category_sets = list()
 		for c in (BlogCategory.objects.all()):
-			category_set = {'category': c, 'articles': get_from_category(c)}
+			articles = BlogPost.objects.filter(categories__in=[c])[:8]
+			category_set = {'category': c, 'articles': articles}
 			category_sets.append(category_set)
 
 		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
 		context['category_sets'] = category_sets
 		context['popular_authors'] = order_by_attribute(User.objects.all()[:20], 'followers')
+		return context
+
+class CategoryPostsView(DetailView, SearchFormMixin):
+	template_name = 'blog/category_articles.html'
+	model = BlogCategory
+	context_object_name = 'category'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		category = self.get_object()
+		context['articles'] = BlogPost.objects.filter(categories__in=[category])
 		return context
 
 class BlogPostDetailView(CreateView, SearchFormMixin):
@@ -105,7 +114,6 @@ class UserDetailView(DetailView, SearchFormMixin):
     model = User
     context_object_name = 'author'
     template_name = "blog/user_profile.html"
-
 
 @login_required
 def follow_author(request, pk):
