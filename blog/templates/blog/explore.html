@@ -22,12 +22,6 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-	<p class="mb-5 subtitle is-4">Latest articles:</p>
-	<div class="columns is-multiline">
-		{% for article in latest_articles %}
-			{% include "blog/includes/article_card.html" with article=article %}
-		{% endfor %}
-	</div>
 	{% for set in category_sets %}
 		{% if set.articles|length > 0 %}
 			<p class="subtitle is-4 mb-5 mt-2">

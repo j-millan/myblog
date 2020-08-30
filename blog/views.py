@@ -76,7 +76,6 @@ class ExploreView(TemplateView, SearchFormMixin):
 			category_set = {'category': c, 'articles': articles}
 			category_sets.append(category_set)
 
-		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
 		context['category_sets'] = category_sets
 		context['popular_authors'] = order_by_attribute(User.objects.all()[:20], 'followers')
 		return context
