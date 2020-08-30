@@ -61,9 +61,12 @@
 				</div>
 			</div>
 			{% if author == user %}
-				<small class="has-text-centered is-block">
-					{{ author.followers.count }} followers
-				</small>
+				<p class="tags has-addons is-centered mt-2 mb-0">
+					{% follow_tag_button author disabled=True %}
+					<span class="tag is-link is-light">
+						{{ author.followers.count }}
+					</span>
+				</p>
 				<small class="has-text-centered is-block">
 					<a href="{% url 'accounts:edit_profile' %}" class="has-text-grey">edit profile</a>
 				</small>
@@ -73,16 +76,19 @@
 						<div class="column">
 							<p class="tags has-addons is-centered">
 								{% follow_tag_button author user %}
-								<a class="tag is-link is-light">
+								<span class="tag is-link is-light">
 									{{ author.followers.count }}
-								</a>
+								</span>
 							</p>
 						</div>
 					</div>
 				{% else %}
-					<small class="has-text-centered is-block">
-						{{ author.followers.count }} followers
-					</small>
+					<p class="tags has-addons is-centered mt-2 mb-0">
+						{% follow_tag_button author disabled=True %}
+						<span class="tag is-link is-light">
+							{{ author.followers.count }}
+						</span>
+					</p>
 				{% endif %}
 			{% endif %}
 		</div>

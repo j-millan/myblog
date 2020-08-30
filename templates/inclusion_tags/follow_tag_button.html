@@ -1,6 +1,15 @@
-<a href="{{ url }}" class="tag {{ tag_color }}">
-	<span class="icon is-small">
-		<i class="fas {{ fa_icon }}"></i>
-	</span>
-	<span>{{ text }}</span>
-</a>
+{% if disabled %}
+	<span class="tag is-light has-text-grey">
+		<span class="icon is-small">
+			<i class="fas fa-user-times"></i>
+		</span>
+		<span>Follow</span>
+	</span >
+{% else %}
+	<a href="{{ url }}" class="tag {{ tag_color }}">
+		<span class="icon is-small">
+			<i class="fas {{ fa_icon }}"></i>
+		</span>
+		<span>{{ text }}</span>
+	</a>
+{% endif %}
