@@ -34,9 +34,9 @@ If you want to install and test this app on your computer, you must install [Git
 	
 	- Create the folder for the project
 
-		cd Documents\Development\Django\
-		mkdir blog_app
-		cd blog_app
+			cd Documents\Development\Django\
+			mkdir blog_app
+			cd blog_app
 
 	- Create and activate the virtual environment
 
@@ -58,7 +58,7 @@ If you want to install and test this app on your computer, you must install [Git
 
 	- Create a file called `secrets.py` inside `myblog/project` and add the next line of code:
 
-		SECRET_KEY = 'generated_secret_key_here'
+			SECRET_KEY = 'generated_secret_key_here'
 
 	- Save the file.
 
@@ -78,7 +78,7 @@ If you want to install and test this app on your computer, you must install [Git
 
 	This will activate ainteractive console where you can execute python commands. Now execute the next commands:
 
-		from myblog.models import BlogCategory
+		from blog.models import BlogCategory
 		BlogCategory.objects.create(name='Off-topic')
 		exit
 
