@@ -5,24 +5,24 @@
 {% endblock title %}
 
 {% block content %}
-	<p class="mb-5 subtitle is-4">Latest articles:</p>
-	<div class="columns is-multiline">
-		{% for article in latest_articles %}
-			{% include "blog/includes/article_card.html" with article=article %}
+	<p class="mb-5 subtitle is-4">Latest posts:</p>
+	<div class="columns">
+		{% include "blog/includes/article_card.html" with article=latest_articles.0 size="is-half" %}
+		<div class="columns column is-multiline py-5">
+			{% for article in latest_articles|slice:"1:4" %}
+				{% include "blog/includes/article_row_small.html" with article=article %}
+			{% endfor %}
+		</div>
+	</div>
+	<div class="columns is-multiline mt-3">
+		{% for article in latest_articles|slice:"4:" %}
+			{% include "blog/includes/article_card.html" with article=article size="is-one-quarter" %}
 		{% endfor %}
 	</div>
 	<p class="mb-5 mt-2 subtitle is-4">Popular articles:</p>
 	<div class="columns is-multiline">
 		{% for article in popular_articles %}
-			{% include "blog/includes/article_card.html" with article=article %}
+			{% include "blog/includes/article_card.html" with article=article size="is-one-quarter" %}
 		{% endfor %}
-	</div>
-	<p class="mb-2 mt-2 subtitle is-4">Popular authors:</p>
-	<div class="level">
-		<ul>
-			{% for author in popular_authors %}
-				<li><a href="{% url 'blog:author_profile' author.pk %}">{{ author.username }} - {{ author.followers.count }} followers</a></li>
-			{% endfor %}
-		</ul>
 	</div>
 {% endblock content %}

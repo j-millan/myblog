@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, FormView, DetailView, CreateView,
 from django.views.generic.base import ContextMixin
 from django.views.generic.edit import FormMixin
 from django.utils.decorators import method_decorator
+from itertools import chain
 from .forms import SearchForm, NewArticleForm, NewCommentForm
 from .models import BlogPost, UserFollowing, BlogComment, BlogCategory
 
@@ -60,7 +61,18 @@ class HomeView(TemplateView, SearchFormMixin):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['latest_articles'] = BlogPost.objects.order_by('-date_published')[:12]
+		
+		user = self.request.user
+		latest = list()
+		following = list()
+		if user.is_authenticated:
+			if user.following.exists():
+				following = [f.user_following for f in (user.following.all())]
+				latest = BlogPost.objects.filter(author__in=following).order_by('-date_published')[:12]
+		
+		fill = BlogPost.objects.exclude(author__in=following).order_by('-date_published')
+		latest = list(chain(latest, fill.exclude(author=user)[:12]))
+		context['latest_articles'] = latest[:12]
 		context['popular_articles'] = context['latest_articles']
 		context['popular_authors'] = User.objects.all()[:12]
 		return context

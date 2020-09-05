@@ -29,7 +29,7 @@
 			</p>
 			<div class="columns is-multiline">
 				{% for article in set.articles %}
-					{% include "blog/includes/article_card.html" with article=article %}
+					{% include "blog/includes/article_card.html" with article=article size="is-one-quarter" %}
 				{% endfor %}
 			</div>
 		{% endif %}
