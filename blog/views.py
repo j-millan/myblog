@@ -67,11 +67,12 @@ class HomeView(TemplateView, SearchFormMixin):
 		following = list()
 		if user.is_authenticated:
 			if user.following.exists():
-				following = [f.user_following for f in (user.following.all())]
+				following = [f.user_following for f in (user.following.all())] 
 				latest = BlogPost.objects.filter(author__in=following).order_by('-date_published')[:12]
-		
+				following.append(user)
+
 		fill = BlogPost.objects.exclude(author__in=following).order_by('-date_published')
-		latest = list(chain(latest, fill.exclude(author=user)[:12]))
+		latest = list(chain(latest, fill[:12]))
 		context['latest_articles'] = latest[:12]
 		context['popular_articles'] = context['latest_articles']
 		context['popular_authors'] = User.objects.all()[:12]
