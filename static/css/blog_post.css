@@ -11,3 +11,11 @@
 		margin-right: 7% !important;
 	}
 }
+
+.body {
+	font-size: 1.2em;
+	font-family: 'Arial';
+	line-height: 1.8em;
+
+	color: hsl(0, 0%, 35%);
+}

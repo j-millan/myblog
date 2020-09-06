@@ -67,9 +67,9 @@
 				<figure class="image is-fullwidth is-16by9 mx-0 my-0">
 					<img src="{{ article.thumbnail.url }}" alt="article thumbnail">
 				</figure>
-				<div class="body is-size-5-desktop mt-4 px-3">
+				<div class="body mt-4">
 					<p>{{ article.introduction }}</p>
-					{{ article.get_body_as_markdown }}
+					<p>{{ article.get_body_as_markdown }}</p>
 				</div>
 			</div>
 			<hr>
@@ -96,9 +96,9 @@
 						<figure class="image thumbnail is-square mx-0 profile-picture" style="background-image: url({{ comment.created_by.profile.profile_picture.url }});"></figure>
 					</div>
 					<div class="column pb-0">			
-						<div class="columns mb-0 is-mobile">
+						<div class="columns mb-0 pb-1 is-mobile">
 							<p class="column mb-0 pb-0"><strong><a href="{% url 'blog:author_profile' comment.created_by.pk %}" class="has-text-grey-dark">{{ comment.created_by.username }}</strong></a> says:</p>
-							<small class="column  has-text-grey has-text-right pr-3">{{ comment.created_at }}</small>	
+							<small class="column  has-text-grey has-text-right pr-3 pb-0">{{ comment.created_at }}</small>	
 						</div> 
 						<p class="mb-0">{{ comment.message}}</p>
 						{% if user == comment.created_by %}
