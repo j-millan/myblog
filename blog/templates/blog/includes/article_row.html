@@ -1,24 +1,37 @@
 {% load inclusion_tags %}
-<div class="column is-full mb-5">
+<div class="column is-full mb-3">
 	<div class="columns box is-mobile px-0 py-0">
 		<div class="column is-4-desktop is-5-mobile  py-3 px-3">
 			<figure class="image thumbnail is-16by9 is-hidden-mobile" style="background-image: url({{ article.thumbnail.url }});"></figure>
 			<figure class="image thumbnail is-4by3 is-hidden-desktop" style="background-image: url({{ article.thumbnail.url }});">
 			</figure>
 		</div>
-		<div class="column pl-2">
-			<div class="columns pt-2 mb-0">
-				<a href="{% url 'blog:article' article.slug %}" class="column title is-9 is-6 is-size-6-mobile has-text-dark mb-0 pr-1 pl-2 pb-1">{{ article.title }}</a>
+		<div class="column pl-2" style="position: relative;">
+			<div class="columns pt-2 mb-1">
+				<a href="{% url 'blog:article' article.slug %}" class="column title is-9 is-6 is-size-6-mobile has-text-grey-dark mb-0 pr-1 pl-3 pb-1">{{ article.title }}</a>
 				<small class="column has-text-right has-text-left-mobile has-text-grey pl-2 pr-5 pb-1 pt-0">{{ article.date_published|date:"M n, H:i" }}</small>
 			</div>
-			<small class="has-text-grey hide-text is-hidden-mobile  pr-2">
+			<small class="has-text-grey hide-text is-hidden-mobile pr-2">
 				{{ article.get_truncated_introduction }}
 			</small>
-			<div class="tags mt-3">
-				{% for category in article.categories.all %}
-					{% render_tag category %}
-				{% endfor %}
-			</div>
+			{% if author_name %}
+				<div class="columns py-0 pr-2 mb-0 is-fullwidth" style="position: absolute; bottom: 5%; width: 100%;">
+					<div class="column tags my-0 py-0">
+						{% for category in article.categories.all|slice:":4" %}
+							{% render_tag category %}
+						{% endfor %}
+					</div>
+					<small class="column is-3 has-text-right has-text-left-mobile pl-2 pt-2 pb-0">
+						<a href="{% url 'blog:author_profile' article.author.pk %}" class="has-text-grey">@{{ article.author.username }}</a>
+					</small>
+				</div>
+			{% else %}
+				<div class="tags"  style="position: absolute; bottom: 7%;">
+					{% for category in article.categories.all %}
+						{% render_tag category %}
+					{% endfor %}
+				</div>
+			{% endif %}
 		</div>
 	</div>
 </div>

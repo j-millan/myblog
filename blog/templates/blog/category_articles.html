@@ -24,10 +24,10 @@
 {% block content %}
 	<p class="title is-5 mb-5">Category: {{ category.name }}</p>
 	{% if articles|length > 0 %}
-		<div class="column pt-5 is-9">
+		<div class="column pt-5 is-10">
 			<div class="columns is-mobile is-multiline is-centered" >
 				{% for article in articles %}
-					{% include "blog/includes/article_row.html" %}
+					{% include "blog/includes/article_row.html" with author_name=True %}
 				{% endfor %}
 			</div>
 		</div>
