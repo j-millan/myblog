@@ -23,9 +23,11 @@
 
 {% block content %}
 	<p class="title is-6 mb-5">{{ articles|length }} results for: {{ query }}</p>
-	<div class="columns is-multiline">
-		{% for article in articles %}
-			{% include "blog/includes/article_card.html" with article=article %}
-		{% endfor %}
+	<div class="columns">
+		<div class="column is-10">
+			{% for article in articles %}
+				{% include "blog/includes/article_row.html" with article=article author_name=True %}
+			{% endfor %}
+		</div>
 	</div>
 {% endblock content %}
