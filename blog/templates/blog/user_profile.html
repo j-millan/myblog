@@ -60,36 +60,33 @@
 					{% social_icons author %}
 				</div>
 			</div>
-			{% if author == user %}
-				<p class="tags has-addons is-centered mt-2 mb-0">
-					{% follow_tag_button author disabled=True %}
-					<span class="tag is-link is-light">
-						{{ author.followers.count }}
-					</span>
-				</p>
-				<small class="has-text-centered is-block">
-					<a href="{% url 'accounts:edit_profile' %}" class="has-text-grey">edit profile</a>
-				</small>
-			{% else %}
-				{% if user.is_authenticated %}
+			{% if user.is_authenticated %}
+				{% if author == user %}
+					<p class="tags has-addons is-centered mt-2 mb-0">
+						{% follow_tag_button author disabled=True %}
+						<span class="tag is-light has-text-grey">
+							{{ author.followers.count }}
+						</span>
+					</p>
+				{% else %}
 					<div class="columns is-centered pt-2">
 						<div class="column">
 							<p class="tags has-addons is-centered">
 								{% follow_tag_button author user %}
-								<span class="tag is-link is-light">
+								<span class="tag is-light">
 									{{ author.followers.count }}
 								</span>
 							</p>
 						</div>
 					</div>
-				{% else %}
-					<p class="tags has-addons is-centered mt-2 mb-0">
-						{% follow_tag_button author disabled=True %}
-						<span class="tag is-link is-light">
-							{{ author.followers.count }}
-						</span>
-					</p>
 				{% endif %}
+			{% else %}
+				<p class="tags has-addons is-centered mt-2 mb-0">
+					{% follow_tag_button author disabled=True %}
+					<span class="tag is-light has-text-grey">
+						{{ author.followers.count }}
+					</span>
+				</p>
 			{% endif %}
 		</div>
 		<div class="is-hidden-desktop">
