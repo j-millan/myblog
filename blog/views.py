@@ -75,7 +75,6 @@ class HomeView(TemplateView, SearchFormMixin):
 		latest = list(chain(latest, fill[:12]))
 		context['latest_articles'] = latest[:12]
 		context['popular_articles'] = context['latest_articles']
-		context['popular_authors'] = User.objects.all()[:12]
 		return context
 
 class ExploreView(TemplateView, SearchFormMixin):
