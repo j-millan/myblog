@@ -1,13 +1,13 @@
 {% load inclusion_tags %}
-<div class="box py-2 px-3 my-1">
+<div class="box py-2 px-3 my-1" style="position: relative;">
 	<div class="columns pt-2 mb-0">
 		<a href="{% url 'blog:article' article.slug %}" class="column title is-9 is-6 is-size-6-mobile has-text-dark mb-0 pl-3 pb-1">{{ article.title }}</a>
 		<a href="{% url 'blog:author_profile' article.author.pk %}" class="column has-text-right has-text-left-mobile has-text-grey pl-2 pr-5 pb-1">@{{ article.author.username }}</a>
 	</div>
-	<small class="has-text-grey hide-text is-hidden-mobile pr-2">
+	<small class="has-text-grey hide-text-small is-hidden-mobile pr-2">
 		{{ article.get_truncated_introduction }}
 	</small>
-	<div class="columns py-0 mt-1 mb-0">
+	<div class="columns py-0 mt-1 mb-0" style="position: absolute; bottom: 3%; width: 100%;">
 		<div class="column tags my-0 py-0">
 			{% for category in article.categories.all|slice:":4" %}
 				{% render_tag category %}

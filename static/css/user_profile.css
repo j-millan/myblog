@@ -1,23 +1,5 @@
 @media screen and (max-width: 769px) {
-	small.hide-text {
-		display: block;
-		line-height: 1em;
-		max-height: 2em;
-		overflow: hidden; 
-		text-overflow: ellipsis;
-	}
-
 	.tags {
 		margin-top: 0 !important;
-	}
-}
-
-@media screen and (min-width: 770px) {
-	small.hide-text {
-		display: block;
-		line-height: 1.5em;
-		max-height: 4.5em;
-		overflow: hidden;
-		text-overflow: ellipsis;
 	}
 }
