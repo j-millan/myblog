@@ -57,6 +57,7 @@
 									<a class="navbar-link dropdown-trigger">{{ user.username }}</a>
 									<div class="navbar-dropdown dropdown-menu">
 										<a href="{% url 'blog:author_profile' user.pk %}" class="navbar-item">Profile</a>
+										<a href="{% url 'accounts:edit_profile' %}" class="navbar-item">About you</a>
 										<a href="{% url 'accounts:settings' %}" class="navbar-item">Settings</a>
 										<hr class="navbar-divider">
 										<a href="{% url 'accounts:logout' %}" class="navbar-item">Log out</a>
