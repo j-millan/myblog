@@ -40,8 +40,8 @@ If you want to install and test this app on your computer, you must install [Git
 
 	- Create and activate the virtual environment
 
-		virtualenv venv
-		venv\Scripts\activate
+			virtualenv venv
+			venv\Scripts\activate
 
 - Clone this repository.
 	
@@ -56,7 +56,7 @@ If you want to install and test this app on your computer, you must install [Git
 	
 	- Go to [miniwebtool](https://miniwebtool.com/django-secret-key-generator/) and generate a new key.
 
-	- Create a file called `secrets.py` inside `myblog/project` and add the next line of code:
+	- Create a file called `secrets.py` inside `myblog/blog_project` and add the next line of code:
 
 			SECRET_KEY = 'generated_secret_key_here'
 
@@ -76,7 +76,7 @@ If you want to install and test this app on your computer, you must install [Git
 
 		py manage.py shell
 
-	This will activate ainteractive console where you can execute python commands. Now execute the next commands:
+	This will activate an interactive console where you can execute python commands. Now execute the next commands:
 
 		from blog.models import BlogCategory
 		BlogCategory.objects.create(name='Off-topic')
